@@ -1,0 +1,188 @@
+.header {
+    position: fixed;
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px 20px;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #fff;
+    z-index: 99;
+
+    @media screen and (min-width: 801px) {
+        display: block;
+        padding: 2vw 1.4vw;
+    }
+
+    @media screen and (min-width: 1441px) {
+        padding: 30px 20px;
+    }
+
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    &__facebook {
+        position: relative;
+        float: left;
+        display: block;
+        width: 7.5%;
+        visibility: hidden;
+        pointer-events: none;
+
+        @media screen and (min-width: 801px) {
+            display: none;
+        }
+
+        img {
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+    }
+
+    &__home {
+        position: relative;
+        width: 30%;
+        display: block;
+        margin: 0 auto;
+
+        @media screen and (min-width: 801px) {
+            width: 10%;
+            float: left;
+        }
+
+        img {
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+    }
+
+    &__menu {
+        position: relative;
+        float: right;
+        display: block;
+
+        @media screen and (min-width: 801px) {
+            display: none;
+        }
+
+        span {
+            display: block;
+            width: 55px;
+            height: 3px;
+            background-color: #000;
+            margin: 17px auto;
+        }
+
+        &--list {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            -webkit-transform: translateY(100%);
+                    transform: translateY(100%);
+                    display: none;
+
+            @media screen and (min-width: 801px) {
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: auto;
+                position: relative;
+                float: right;
+                display: block;
+                width: auto;
+                -webkit-transform: translateY(0%);
+                        transform: translateY(0%);
+            }
+
+            @media screen and (min-width: 1441px) {
+                margin: 5px 0;
+            }
+
+            ul {
+                position: relative;
+                display: block;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                background-color: #FFF;
+                @media screen and (min-width: 801px) {
+                    width: auto;
+                }
+
+                li {
+                    position: relative;
+                    display: block;
+                    margin: 0;
+                    padding: 0;
+                    cursor: pointer;
+                    width: 100%;
+
+                    @media screen and (min-width: 801px) {
+                        display: inline-block;
+                        width: auto;
+                    }
+
+                    @media screen and (min-width: 801px) and (max-width: 1280px) {
+                        padding: 0 0.7vw;
+                        margin: 0 0.7vw;
+                    }
+
+                    @media screen and (min-width: 1441px) {
+                        padding: 0 10px;
+                        margin: 0 10px;
+                    }
+
+                    a {
+                        position: relative;
+                        display: block;
+                        font-family: 'Noto Sans TC', sans-serif;
+                        color: #000;
+                        text-decoration: none;
+                        cursor: pointer;
+                        letter-spacing: 2px;
+                        font-weight: 300;
+                        width: 100%;
+                        font-size: 50px;
+                        padding: 30px 50px;
+                        text-align: center;
+
+                        &:hover {
+                            color: #333;
+                        }
+                        @media screen and (min-width: 801px) {
+                            width: auto;
+                            padding: 0;
+                            text-align: left;
+                        }
+
+                        @media screen and (min-width: 801px) and (max-width: 1280px) {
+                            font-size: 1.25vw;
+                        }
+
+                        @media screen and (min-width: 1441px) {
+                            font-size: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}   

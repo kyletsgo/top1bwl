@@ -1,0 +1,85 @@
+
+version: 0.0
+os: linux
+files:
+  - source: /app
+    destination: /var/www/html/app
+  #- source: /bootstrap
+  #  destination: /var/www/html/bootstrap
+  - source: /config
+    destination: /var/www/html/config
+  - source: /database
+    destination: /var/www/html/database
+  - source: /public
+    destination: /var/www/html/public
+  - source: /resources
+    destination: /var/www/html/resources
+  - source: /routes
+    destination: /var/www/html/routes
+  - source: /.env.demo
+    destination: /var/www/html
+  - source: /.env.production
+    destination: /var/www/html
+  - source: /after_install.sh
+    destination: /var/www/html
+  - source: /before_install.sh
+    destination: /var/www/html
+  - source: /composer.json
+    destination: /var/www/html
+  - source: /composer.lock
+    destination: /var/www/html
+  - source: /artisan
+    destination: /var/www/html
+
+#permissions:
+#  - object: /var/www/html
+#    except: [bootstrap, bootstrap/**]
+#    owner: www-data
+#    group: www-data
+#    mode: 644
+#    type:
+#      - file
+#  - object: /var/www/html
+#    except: [bootstrap, bootstrap/**]
+#    owner: www-data
+#    group: www-data
+#    mode: 755
+#    type:
+#      - directory
+
+hooks:
+# During the ApplicationStop deployment lifecycle event, run the commands
+#   in the script specified in "location" starting from the root of the
+#   revision's file bundle.
+
+#  ApplicationStop:
+#    - location:
+#      timeout:
+#      runas:
+
+# During the BeforeInstall deployment lifecycle event, run the commands
+#   in the script specified in "location".
+
+#  BeforeInstall:
+#    - location: before_install.sh
+#      timeout: 300
+#      runas: ubuntu
+
+# During the AfterInstall deployment lifecycle event, run the commands
+#   in the script specified in "location".
+
+  AfterInstall:
+    - location: after_install.sh
+      timeout: 300
+      runas: ubuntu
+
+# During the ApplicationInstall deployment lifecycle event, run the commands
+#   in the script specified in "location".
+
+#  ApplicationStart:
+
+# During the ValidateService deployment lifecycle event, run the commands
+#   in the script specified in "location".
+
+#  ValidateService:
+  

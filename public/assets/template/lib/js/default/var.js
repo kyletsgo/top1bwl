@@ -1,0 +1,1 @@
+var ADD_URL = window.location.href;

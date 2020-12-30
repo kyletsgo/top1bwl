@@ -1,0 +1,342 @@
+#style3 {
+    background-color: #eaeaea;
+    // background-image: url(../../images/hand-painted-watercolor-background.jpg);
+
+    .header {
+        background-color: rgba(255, 255, 255, 0.9);
+
+        .home {
+            color: #666;
+        }
+
+        .menu {
+            color: #666;
+        }
+    }
+
+    .carousel {
+        &__content {
+            width: 100%;
+            margin: 0 auto;
+            padding: 2.5%;
+        }
+
+        &__text {
+            background: rgba(40, 44, 56, 0.6);
+        }
+    }
+
+    .combine {
+        background-color: #dbd1c7;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30%;
+            height: 100%;
+            background-color: #282c38;
+
+            @media screen and (max-width: 768px) {
+                width: 0px;
+            }
+        }
+
+        &__reverse {
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                right: 0;
+                left: auto;
+                background-color: #282c38;
+            }
+        }
+
+        .article {
+            &__title {
+                color: #333;
+                font-family: 'Noto Serif TC', serif;
+                font-weight: bold;
+                margin-bottom: 2rem;
+                line-height: 1.5;
+                font-size: $main;
+            }
+
+            &__text {
+                color: #666;
+            }
+
+            &__list {
+                li {
+                    color: #333;
+                }
+            }
+        }
+
+        .event {
+            a {
+                background-color: #aa896d;
+                color: #FFF;
+                border-radius: 0;
+                letter-spacing: 2px;
+                -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    .category {
+        .array {
+            border-radius: 0.5rem;
+            background-color: #fff;
+            -webkit-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
+            &__title {
+                color: #282c38;
+                font-family: 'Noto Serif TC', serif;
+                font-weight: bold;
+            }
+
+            &__date {
+                color: #666;
+            }
+
+            &__text {
+                color: #666;
+            }
+
+            &__link {
+                background-color: #aa896d;
+                color: #FFF;
+                border-radius: 0;
+                letter-spacing: 0px;
+                -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    .hero {
+        &__content {
+            padding: 30px 5%;
+        }
+
+        .content {
+            background-color: #282c38;
+            -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+            border: 2px solid #fff;
+
+            .article {
+                &__title {
+                    color: #FFF;
+                    font-family: 'Noto Serif TC', serif;
+                    font-weight: bold;
+                }
+
+                &__text {
+                    color: #FFF;
+
+                }
+            }
+
+            .event {
+                a {
+                    border: 1px solid #d6b6a4;
+                    color: #d6b6a4;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+
+    .item {
+
+        &__article {
+            .content {
+                &__title {
+                    color: #333;
+                    font-family: 'Noto Serif TC', serif;
+                    font-weight: bold;
+                    font-size: $main;
+                }
+
+                &__text {
+                    color: #666;
+                    padding: 0 5%;
+                }
+
+                &__list {
+                    li {
+                        color: #666;
+                    }
+                }
+            }
+
+            .event {
+                a {
+                    background-color: #aa896d;
+                    color: #FFF;
+                    border-radius: 0;
+                    letter-spacing: 2px;
+                    -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+                    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+                }
+
+            }
+        }
+
+        &__content {
+            .content {
+                background-color: #282c38;
+                border-radius: 0;
+
+                .article {
+                    &__title {
+                        color: #fff;
+                        font-family: 'Noto Serif TC', serif;
+                        font-weight: bold;
+                        margin-bottom: 1.5rem;
+                    }
+
+                    &__text {
+                        color: #fff;
+                    }
+
+                    &__list {
+                        li {
+                            color: #fff;
+                            font-family: 'Noto Serif TC', serif;
+                        }
+                    }
+                }
+
+                .event {
+                    a {
+                        background: none;
+                        color: #FFF;
+                        border-radius: 0;
+                        border: 1px solid #fff;
+                        letter-spacing: 2px;
+                        -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+                        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+                    }
+
+                }
+            }
+        }
+    }
+
+    .note {
+        .content {
+            &__title {
+                color: #333;
+                font-weight: bold;
+                font-size: $main;
+                font-family: 'Noto Serif TC', serif;
+
+            }
+
+            &__text {
+                color: #666;
+            }
+
+            &__list {
+                li {
+                    color: #666;
+                }
+            }
+        }
+
+        .event {
+            a {
+                background-color: #aa896d;
+                color: #FFF;
+                border-radius: 0;
+                letter-spacing: 2px;
+                -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    .main {
+        &__note {
+            background-color: #282c38;
+
+            h2 {
+                color: #fff !important;
+                background: none !important;
+                font-family: 'Noto Serif TC', serif;
+            }
+
+            p {
+                color: #fff !important;
+                font-weight: 400 !important;
+            }
+        }
+
+        &__images {
+            .images__content {
+                margin-top: -50px;
+                -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+                margin-bottom: 50px;
+
+                @media screen and (max-width: 768px) {
+                    margin-bottom: 25px;
+                }
+
+                &::after {
+                    position: absolute;
+                    left: 50%;
+                    -webkit-transform: translateX(-50%) translateY(50%);
+                    transform: translateX(-50%) translateY(50%);
+                    bottom: 0;
+                    content: '';
+                    width: 2px;
+                    height: 100px;
+                    display: block;
+                    background-color: #282c38;
+
+                    @media screen and (max-width: 768px) {
+                        height: 50px;
+                    }
+                }
+            }
+        }
+    }
+
+    .form {
+        &__content {
+            border: 3px solid #282c38;
+
+            .content {
+                &__title {
+                    color: #282c38;
+                }
+            }
+
+            a {
+                background-color: #aa896d;
+                color: #FFF;
+                border-radius: 0;
+                letter-spacing: 2px;
+                -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    .edit {
+        &__content {
+            h2 {
+                color: #282c38;
+            }
+        }
+    }
+}

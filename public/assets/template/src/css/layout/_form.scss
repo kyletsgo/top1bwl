@@ -1,0 +1,94 @@
+.form {
+    position: relative;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    &__content {
+        width: 100%;
+        position: relative;
+        max-width: 768px;
+        padding: 30px 5%;
+        margin: 0 5%;
+        border: 2px solid #e2e2e2;
+        border-radius: 10px;
+        margin-top: 20px;
+        margin-bottom: 40px;
+        background-color: #fff;
+        
+        -webkit-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        @media screen and (max-width: 768px) {
+            padding: 30px 10%;
+        }
+        .content {
+            &__title {
+                position: relative;
+                font-size: $main;
+                line-height: 1.5;
+                font-weight: 600;
+                margin: 2rem 0;
+                margin-top: 1rem;
+
+                @media screen and (max-width: 768px) {
+                    font-size: $xl;
+                }
+            }
+
+            &__group {
+                position: relative;
+                display: block;
+
+                .group {
+                    &__input {
+                        display: block;
+                        margin: 15px auto;
+                        width: 100%;
+
+                        label {
+                            position: relative;
+                            font-size: $lg;
+                            line-height: 1.5;
+                            color: #666;
+                            display: block;
+                            font-weight: bold;
+
+                            @media screen and (max-width: 768px) {
+                                font-size: $md;
+                            }
+                        }
+
+                        input {
+                            width: 100%;
+                            padding: 5px 0px;
+                            border: none;
+                            border-bottom: 1px solid #333;
+                            border-radius: 0;
+                        }
+                    }
+
+                    &__submit {
+                        padding: 5px 30px;
+                        border-radius: 0.5em;
+                        text-decoration: none;
+                        background-color: #333;
+                        margin: 20px auto;
+                        color: #FFF;
+                        display: inline-block;
+
+                        @media screen and (max-width: 768px) {
+                            font-size: $normal;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

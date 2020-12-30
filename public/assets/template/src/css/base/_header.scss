@@ -1,0 +1,33 @@
+.header {
+    width: 100%;
+    position: relative;
+    background-color: #999;
+    padding: 15px;
+
+    &__home {
+        position: relative;
+        margin: 0 15px;
+        color: #333;
+
+        &:hover {
+            color: #666;
+            text-decoration: none;
+        }
+    }
+
+    &__nav {
+        position: relative;
+        list-style: none;
+
+        &__btn {
+            display: inline-block;
+            margin: 0 15px;
+            color: #333;
+
+            &:hover {
+                color: #666;
+                text-decoration: none;
+            }
+        }
+    }
+}

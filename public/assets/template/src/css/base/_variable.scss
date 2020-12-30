@@ -1,0 +1,37 @@
+/* RWD Size */
+$Small_devices: 576px;
+$Medium_devices: 768px;
+$Large_devices: 992px;
+$Extra_large_device: 1200px;
+
+$maxWidth: 640px / 3;
+
+/* Color */
+$white: #FFF;
+$black: #000;
+$blue_1: #223d90;
+$blue_2: #073190;
+$blue_3: #011f45;
+$blue_4: #6bd3fd;
+$blue_5: #a4b2d1;
+$blue_6: #04479d;
+
+/*font*/
+$chinese: Microsoft JhengHei;
+$small: 0.813em;
+$normal: 1em;
+$medium: 1.125em;
+$big: 1.875em;
+$mobile: 1.2em;
+$bigger: 2.188em;
+$middle: 1.25em;
+$title: 1.5em;
+$fixed: 10;
+
+@mixin ab_center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,80 @@
+.hover_btn {
+    span {
+        position: absolute;
+        /*
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+        */
+        width: 0px;
+        height: 0px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: block;
+        background-color: rgba(237, 155, 33, 0.8);
+        border-radius: 50%;
+        -webkit-transition: all 0.6s;
+        transition: all 0.6s;
+    }
+
+    .icon {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+    &-active {
+        span {
+            width: 2500px;
+            height: 2500px;
+        }
+
+        .icon {
+            opacity: 1;
+        }
+
+        .arrow {
+            opacity: 1;
+        }
+    }
+
+
+}
+
+.hover_btn_this {
+    span {
+        position: absolute;
+        /*
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+        */
+        width: 1000px;
+        height: 1000px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: block;
+        background-color: rgba(237, 155, 33, 0.8);
+        border-radius: 50%;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+
+    .icon {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+}
