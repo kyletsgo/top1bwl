@@ -73,6 +73,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
         // 推廣表單
         Route::get('/promote_form', 'PromoteFormController@index');
 
-        // test
+        // test 2
     });
 });
