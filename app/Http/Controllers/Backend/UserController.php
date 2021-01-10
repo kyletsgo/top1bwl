@@ -6,17 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Backend\UserService;
 use App\Services\Backend\SiteManagementService;
+use App\Repository\Backend\UserRepository;
+use Auth;
 
 class UserController extends Controller
 {
     protected $userSv;
     protected $siteManagementSv;
+    protected $userRepo;
 
     public function __construct(UserService $userService,
-                                SiteManagementService $siteManagementService)
+                                SiteManagementService $siteManagementService,
+                                UserRepository $userRepository)
     {
         $this->userSv = $userService;
         $this->siteManagementSv = $siteManagementService;
+        $this->userRepo = $userRepository;
     }
 
     /**
@@ -24,11 +29,27 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $rows = $this->userSv->searchList($request, 15);
+        $user_id = Auth::user()->id;
+        $user = $this->userRepo->getById($user_id);
+
+        if ($this->userSv->isAdminUser($user_id)) {
+            $rows = $this->userSv->searchList('');
+        } else {
+            $rows = $this->userSv->searchList($user->username);
+        }
+
+        if ($user->role != 2) {
+            $filtered_rows = $rows->filter(function ($item) {
+                return $item->role != 2;
+            });
+        } else {
+            $filtered_rows = $rows;
+        }
 
         return view('admin.user.list', [
-            'rows' => $rows,
+            'rows' => $filtered_rows,
             'cond' => $request,
+            'user_role' => $user->role,
         ]);
     }
 

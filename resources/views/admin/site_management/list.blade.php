@@ -67,7 +67,11 @@
 									<a class="btn btn-warning btn-xs" href="/backend/site_management/edit/{{ $row->site_id }}">
 										<strong>編輯</strong>
 									</a>
-									@if ($isAdmin === true)
+									@if ($row->enable !== 0)
+										<a class="btn btn-info btn-xs" href="/backend/page_manage/">
+											<strong>建立網頁</strong>
+										</a>
+									@elseif ($isAdmin === true)
 										<button type="button" class="btn btn-success btn-xs enableSite" data-siteid="{{ $row->site_id }}">
 											<strong>生成網站</strong>
 										</button>

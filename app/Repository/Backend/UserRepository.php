@@ -7,11 +7,15 @@ use App\Group;
 
 class UserRepository
 {
-    public function search($pageLimit)
+    public function search($username, $pageLimit)
     {
 //        \DB::enableQueryLog();
 
         $query = User::select('*');
+
+        if (!empty($username)) {
+            $query->where('username', $username);
+        }
 
         $query->orderBy('id', 'asc');
 

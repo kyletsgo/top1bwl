@@ -14,9 +14,12 @@
 							<form method="post" action="" name="searchFrom">
 								{{ csrf_field() }}
 								<div class="form-group">
-									<a class="btn btn-darkblue btn-xs" href="/backend/user/create">
-										<i class="fas fa-plus"></i><strong>新增</strong>
-									</a>
+									@if ($user_role !== 1)
+										<a class="btn btn-darkblue btn-xs" href="/backend/user/create">
+											<i class="fas fa-plus"></i><strong>新增</strong>
+										</a>
+									@endif
+
 								</div>
 							</form>
 						</div>
@@ -44,22 +47,13 @@
 								<td>{{ $row->created_at }}</td>
 								<td>{{ $row->updated_at }}</td>
 								<td style="text-align: right">
-									<a class="btn btn-success btn-xs" href="/backend/user/edit/{{ $row->id }}">
-										<strong>修改密碼</strong>
-									</a>
-									<button type="button" class="btn btn-danger btn-xs deleteUser" data-userid="{{ $row->id }}">
-										<strong>刪除帳號</strong>
-									</button>
-									<button type="button" class="btn btn-warning btn-xs releaseAuth" data-userid="{{ $row->id }}">
-										<strong>下放權限</strong>
-									</button>
+									{!! $BackendPresenter->showUserControl($user_role, $row->role, $row->id) !!}
 								</td>
 							</tr>
 						@endforeach
 					</tbody>
 				</table>
 				<div class="col-md-12 text-center no-margin">
-					{{ $rows->links() }}
 				</div>
 			</div>
 		</div>

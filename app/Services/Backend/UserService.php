@@ -16,9 +16,9 @@ class UserService
         $this->userRepo = $userRepository;
     }
 
-    public function searchList(Request $request, $pageLimit = 0)
+    public function searchList($username, $pageLimit = 0)
     {
-        return $this->userRepo->search($pageLimit);
+        return $this->userRepo->search($username, $pageLimit);
     }
 
     private function setCookie($input, $cookie)

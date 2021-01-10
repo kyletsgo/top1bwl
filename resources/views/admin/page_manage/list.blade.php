@@ -13,7 +13,7 @@
 							<form method="post" action="{{ asset('/backend/page_manage') }}" name="searchFrom">
 								{{ csrf_field() }}
 								<div class="form-group">
-									<a class="btn btn-darkblue btn-xs" href="/backend/page_manage/create_select_template">新增</a>
+									<a class="btn btn-darkblue btn-xs" href="/backend/page_manage/create_select_template">新增網頁</a>
 								</div>
 							</form>
                         </div>
