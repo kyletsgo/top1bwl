@@ -31,6 +31,13 @@
 						</tr>
 					</thead>
 					<tbody>
+					@if ($user_role === 1 && $site_enabled === 0)
+						<tr>
+							<td>
+								網站未生成，請洽管理員。
+							</td>
+						</tr>
+					@else
 						@foreach($rows as $key => $row)
 							<tr>
 								<td>{{ $rows->firstItem() + $key }}</td>
@@ -46,6 +53,7 @@
 								</td>
 							</tr>
 						@endforeach
+					@endif
 					</tbody>
 				</table>
 				<div class="col-md-12 text-center no-margin">

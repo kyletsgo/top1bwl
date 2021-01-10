@@ -39,11 +39,14 @@ class PageManageController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
+        $user = $this->userRepo->getById($user_id);
+
+        $site = $this->siteManagementRepo->getByUserId($user_id);
+        $site_enabled = $site->enable;
 
         if ($this->userSv->isAdminUser($user_id)) {
             $rows = $this->pageManagementServ->searchList(0, 15);
         } else {
-            $site = $this->siteManagementRepo->getByUserId($user_id);
             $site_id = $site->site_id;
             $rows = $this->pageManagementServ->searchList($site_id, 15);
         }
@@ -63,6 +66,8 @@ class PageManageController extends Controller
 
         return view('admin.page_manage.list', [
             'rows' => $rows,
+            'user_role' => $user->role,
+            'site_enabled' => $site_enabled,
         ]);
     }
 

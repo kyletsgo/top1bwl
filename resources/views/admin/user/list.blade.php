@@ -19,7 +19,6 @@
 											<i class="fas fa-plus"></i><strong>新增</strong>
 										</a>
 									@endif
-
 								</div>
 							</form>
 						</div>
