@@ -69,7 +69,7 @@
 									</a>
 									@if ($row->enable !== 0)
 										<a class="btn btn-info btn-xs" href="/backend/page_manage/">
-											<strong>建立網頁</strong>
+											<strong>前往建立網頁</strong>
 										</a>
 									@elseif ($isAdmin === true)
 										<button type="button" class="btn btn-success btn-xs enableSite" data-siteid="{{ $row->site_id }}">
