@@ -74,5 +74,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
         Route::get('/promote_form', 'PromoteFormController@index');
 
         // test 2
+        Route::get('/calendar', 'CalendarController@show');
     });
 });
