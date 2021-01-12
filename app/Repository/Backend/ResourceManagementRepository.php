@@ -49,4 +49,16 @@ class ResourceManagementRepository
     {
         return ResourceArticleManagement::find($id);
     }
+
+    public function getFromUsers($user_ids)
+    {
+        $query = ResourceArticleManagement::select('top1bwl_article_management.*');
+        if ($user_ids != null) {
+            $query->whereIn('user_id', $user_ids);
+        }
+        $query->orderBy('article_id', 'asc');
+        $models = $query->get();
+
+        return $models;
+    }
 }

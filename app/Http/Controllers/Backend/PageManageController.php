@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\Backend\PageManagementService;
 use App\Repository\Backend\PageManagementRepository;
 use App\Repository\Backend\SiteManagementRepository;
+use App\Repository\Backend\ResourceManagementRepository;
 use App\Services\Backend\ResourceManagementService;
 use App\Repository\Backend\UserRepository;
 use Auth;
@@ -18,6 +19,7 @@ class PageManageController extends Controller
     protected $userSv;
     protected $pageManagementRepo;
     protected $siteManagementRepo;
+    protected $resourceManagementRepo;
     protected $userRepo;
     protected $resourceManagementSv;
 
@@ -25,6 +27,7 @@ class PageManageController extends Controller
                                 UserService $userService,
                                 PageManagementRepository $pageManagementRepository,
                                 SiteManagementRepository $siteManagementRepository,
+                                ResourceManagementRepository $resourceManagementRepository,
                                 UserRepository $userRepository,
                                 ResourceManagementService $resourceManagementService)
     {
@@ -32,6 +35,7 @@ class PageManageController extends Controller
         $this->userSv = $userService;
         $this->pageManagementRepo = $pageManagementRepository;
         $this->siteManagementRepo = $siteManagementRepository;
+        $this->resourceManagementRepo = $resourceManagementRepository;
         $this->userRepo = $userRepository;
         $this->resourceManagementSv = $resourceManagementService;
     }
@@ -349,7 +353,13 @@ class PageManageController extends Controller
         ];
 
         $user_id = Auth::user()->id;
-        $rows = $this->resourceManagementSv->searchList($user_id);
+        if ($user_id === 1) {
+            $user_ids = null;
+        } else {
+            $user_ids = [$user_id, '1'];
+        }
+
+        $rows = $this->resourceManagementRepo->getFromUsers($user_ids);
         foreach ($rows as $row) {
             $temp = [
                 'title' => $row->title,
