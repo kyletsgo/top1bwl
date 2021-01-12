@@ -24,10 +24,10 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>編號</th>
-							<th>標題</th>
+							<th width="5%">編號</th>
+							<th width="15%">標題</th>
 							<th>內容</th>
-							<th>建立時間</th>
+							<th width="10%">建立時間</th>
 							<th></th>
 						</tr>
 					</thead>
