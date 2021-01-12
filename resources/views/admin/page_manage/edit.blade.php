@@ -69,6 +69,28 @@
 			extraPlugins : 'stylesheetparser',
 			contentsCss : [ '/assets/template/dist/css/index.min.css?v=20201201' , 'https://unpkg.com/swiper/swiper-bundle.min.css'],
 			stylesSet : [],
+            templates: 'my',
+            on: {
+                instanceReady: function( argument ) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/backend/page_manage/get-template",
+                        dataType: "json",
+                        data: {},
+                    }).done( function(result) {
+                        // console.log(result);
+
+                        CKEDITOR.addTemplates( 'my', {
+                            imagesPath: CKEDITOR.getUrl('/component/images/'),
+                            templates: result.data.ck_template
+                        });
+                    }).fail(function() {
+                        console.log('error');
+                    }).always(function() {
+                        $.unblockUI();
+                    });
+                }
+            }
 		});
 
         CKFinder.setupCKEditor(editor);
