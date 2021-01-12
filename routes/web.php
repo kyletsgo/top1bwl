@@ -9,10 +9,10 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
     Route::auth();
 
     Route::group(['middleware' => 'auth:web', 'namespace' => 'Backend'], function () {
-        Route::post('/logout', function() {
-            Auth::logout();
-            return redirect('/backend');
-        });
+//        Route::post('/logout', function() {
+//            Auth::logout();
+//            return redirect('/backend');
+//        });
 
         Route::get('/', ['as' => 'backend.index', 'uses' => 'IndexController@index']);
 
@@ -73,7 +73,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
         // 推廣表單
         Route::get('/promote_form', 'PromoteFormController@index');
 
-        // test 2
+        // 行事曆區
         Route::get('/calendar', 'CalendarController@show');
     });
 });
