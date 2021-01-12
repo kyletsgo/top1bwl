@@ -9,10 +9,10 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
     Route::auth();
 
     Route::group(['middleware' => 'auth:web', 'namespace' => 'Backend'], function () {
-//        Route::post('/logout', function() {
-//            Auth::logout();
-//            return redirect('/backend');
-//        });
+        Route::post('/logout', function() {
+            Auth::logout();
+            return redirect('/backend');
+        });
 
         Route::get('/', ['as' => 'backend.index', 'uses' => 'IndexController@index']);
 
