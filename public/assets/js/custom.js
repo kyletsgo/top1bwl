@@ -363,6 +363,7 @@ jQuery(document).ready(function() {
       $('.rdio-primary').addClass('rdio-default').removeClass('rdio-primary');
       $('.text-primary').removeClass('text-primary').addClass('text-orange');
    }
-      
+
+   $('.nav-parent').find('a.parent-name').trigger('click');
 
 });
