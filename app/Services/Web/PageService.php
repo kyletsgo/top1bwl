@@ -57,12 +57,12 @@ class PageService
             </div>';
     }
 
-    public function getFloatBtnItemHtml()
+    public function getFloatBtnItemHtml($add_friend_link)
     {
         return '<div class="floatBtn">
-                    <a href="javascript:void">
+                    <a href="' . $add_friend_link . '">
                         <img src="/assets/template/images/LINE_APP_RGB_20190219-02.png" alt="">
-                        <p>線上諮詢</p>
+                        <p>加好友</p>
                     </a>
                 </div>';
     }
