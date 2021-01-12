@@ -348,7 +348,8 @@ class PageManageController extends Controller
             ],
         ];
 
-        $rows = $this->resourceManagementSv->searchList();
+        $user_id = Auth::user()->id;
+        $rows = $this->resourceManagementSv->searchList($user_id);
         foreach ($rows as $row) {
             $temp = [
                 'title' => $row->title,

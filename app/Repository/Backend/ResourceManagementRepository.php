@@ -6,9 +6,14 @@ use App\ResourceArticleManagement;
 
 class ResourceManagementRepository
 {
-    public function search($pageLimit)
+    public function search($user_id, $pageLimit)
     {
-        $query = ResourceArticleManagement::select('top1bwl_article_management.*');
+        $query = ResourceArticleManagement::select('top1bwl_article_management.*', 'users.nickname');
+        $query->join('users', 'top1bwl_article_management.user_id', '=', 'users.id');
+
+        if (!is_null($user_id)) {
+            $query->where('user_id', $user_id);
+        }
 
         $query->orderBy('article_id', 'asc');
 

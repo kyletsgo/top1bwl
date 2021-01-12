@@ -17,9 +17,13 @@ class ResourceManagementService
         $this->resourceManagementRepo = $resourceManagementRepository;
     }
 
-    public function searchList($pageLimit = 0)
+    public function searchList($user_id, $pageLimit = 0)
     {
-        return $this->resourceManagementRepo->search($pageLimit);
+        if ($user_id === 1) {
+            $user_id = null;
+        }
+
+        return $this->resourceManagementRepo->search($user_id, $pageLimit);
     }
 
     private function setCookie($input, $cookie)
@@ -33,7 +37,7 @@ class ResourceManagementService
         return $input;
     }
 
-    public function createItem(Request $request)
+    public function createItem(Request $request, $user_id)
     {
         $validateRules = [
             'title' => 'required|max:80',
@@ -49,7 +53,7 @@ class ResourceManagementService
 
         $request->validate($validateRules, $validateMessage);
 
-        $this->resourceManagementRepo->insert(1, $request->title, $request->input('content'));
+        $this->resourceManagementRepo->insert($user_id, $request->title, $request->input('content'));
     }
 
     public function getEditItem($id)

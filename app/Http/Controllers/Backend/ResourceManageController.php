@@ -35,7 +35,8 @@ class ResourceManageController extends Controller
      */
     public function index(Request $request)
     {
-        $rows = $this->resourceManagementSv->searchList(15);
+        $user_id = Auth::user()->id;
+        $rows = $this->resourceManagementSv->searchList($user_id, 15);
 
         return view('admin.resource_manage.list', [
             'rows' => $rows,
@@ -56,7 +57,8 @@ class ResourceManageController extends Controller
      */
     public function create(Request $request)
     {
-        $this->resourceManagementSv->createItem($request);
+        $user_id = Auth::user()->id;
+        $this->resourceManagementSv->createItem($request, $user_id);
 
         return redirect('/backend/resource_manage');
     }
