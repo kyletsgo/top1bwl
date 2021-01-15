@@ -42,15 +42,6 @@ class SiteManagementController extends Controller
     }
 
     /**
-     * 新增頁
-     *
-     */
-    public function createPage()
-    {
-        return view('admin.redeem_task.create');
-    }
-
-    /**
      * 修改頁
      *
      */

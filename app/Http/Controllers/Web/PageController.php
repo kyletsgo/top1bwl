@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\Web\PageService;
 use App\Repository\Backend\PageManagementRepository;
 use App\Repository\Backend\LineManagementRepository;
+use App\Repository\Backend\SiteManagementRepository;
 use Log;
 
 class PageController extends Controller
@@ -14,14 +15,17 @@ class PageController extends Controller
     protected $pageServ;
     protected $pageManagementRepo;
     protected $lineManagementRepo;
+    protected $siteManagementRepo;
 
     public function __construct(PageService $pageService,
                                 PageManagementRepository $pageManagementRepository,
-                                LineManagementRepository $lineManagementRepository)
+                                LineManagementRepository $lineManagementRepository,
+                                SiteManagementRepository $siteManagementRepository)
     {
         $this->pageServ = $pageService;
         $this->pageManagementRepo = $pageManagementRepository;
         $this->lineManagementRepo = $lineManagementRepository;
+        $this->siteManagementRepo = $siteManagementRepository;
     }
 
     /**
@@ -38,6 +42,7 @@ class PageController extends Controller
         $page_content = $page->content;
         $site_id = $page->site_id;
         $add_friend_link = $this->lineManagementRepo->getLineLinkBySiteId($site_id);
+        $site = $this->siteManagementRepo->getBySiteId($site_id);
 
         $menu_items = $this->pageServ->getMenuItemsHtml($folder_name);
         $form_item = $this->pageServ->getFormItemHtml();
@@ -49,7 +54,8 @@ class PageController extends Controller
 
         return view('web.page', [
             'page_content' => $page_content,
-            'site_id' => $page->site_id
+            'site_id' => $page->site_id,
+            'site' => $site
         ]);
     }
 

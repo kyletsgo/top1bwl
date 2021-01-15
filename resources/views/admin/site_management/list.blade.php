@@ -44,7 +44,7 @@
 							<th>站名</th>
 							<th>標題</th>
 							<th>敘述</th>
-							<th>SEO meta</th>
+							<th>Keywords</th>
 							<th>生成狀態</th>
 							<th>建立時間</th>
 							<th></th>

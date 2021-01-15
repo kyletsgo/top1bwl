@@ -60,7 +60,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="header-require col-lg-2">SEO meta</td>
+										<td class="header-require col-lg-2">Keywords</td>
 										<td>
 											<div class="col-lg-4 nopadding">
 												<input type="text" id="og_meta" name="og_meta" value="{{ $row->og_meta }}" maxlength="80" class="form-control">

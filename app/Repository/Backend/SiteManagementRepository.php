@@ -73,6 +73,11 @@ class SiteManagementRepository
         return SiteManagement::where('user_id', $user_id)->first();
     }
 
+    public function getBySiteId($site_id)
+    {
+        return SiteManagement::find($site_id);
+    }
+
     public function updateEnable($site_id, $enable)
     {
         $model = SiteManagement::find($site_id);
