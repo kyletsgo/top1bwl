@@ -3,14 +3,19 @@
 namespace App\Services\Web;
 
 use App\Repository\Backend\PageManagementRepository;
+use App\Repository\Backend\PromoManagementRepository;
+use App\Repository\Backend\PromoteFormRepository;
 
 class PageService
 {
     protected $pageManagementRepo;
+    protected $promoManagementRepo;
 
-    public function __construct(PageManagementRepository $siteManagementRepository)
+    public function __construct(PageManagementRepository $siteManagementRepository,
+                                PromoManagementRepository $promoManagementRepository)
     {
         $this->pageManagementRepo = $siteManagementRepository;
+        $this->promoManagementRepo = $promoManagementRepository;
     }
 
     public function getPage($page_id)
@@ -65,5 +70,31 @@ class PageService
                         <p>加好友</p>
                     </a>
                 </div>';
+    }
+
+    public function getPromoItemHtml()
+    {
+        $items = $this->promoManagementRepo->getAllPromo();
+
+        $li_items = '';
+        foreach ($items as $item) {
+            $li_items .= '<a class="swiper-slide sale__open" data-img="' . url($item->image) . '" href="javascript:void(0)">' . $item->title . '</a>';
+        }
+
+        $menu_items = '<div class="sale">
+                <div class="swiper-container sale__bar">
+                    <div class="swiper-wrapper">'. $li_items .'</div>
+                </div>
+                <div class="sale__popup sale__popup--active" id="sale__popup">
+                    <div class="sale__box" id="sale__box" style="background-image: url(../../images/S__104251397.jpg)">
+                        <a class="sale__close" id="sale__close" href="javascript:void(0)">
+                            <span></span>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>';
+
+        return $menu_items;
     }
 }

@@ -47,10 +47,12 @@ class PageController extends Controller
         $menu_items = $this->pageServ->getMenuItemsHtml($folder_name);
         $form_item = $this->pageServ->getFormItemHtml();
         $floatBtn_item = $this->pageServ->getFloatBtnItemHtml($add_friend_link);
+        $promo_items = $this->pageServ->getPromoItemHtml();
 
         $page_content = str_replace("<menu_items></menu_items>", $menu_items, $page_content);
         $page_content = str_replace("<form_item></form_item>", $form_item, $page_content);
         $page_content = str_replace("<floatbtn_item></floatbtn_item>", $floatBtn_item, $page_content);
+        $page_content = str_replace("<promo_items></promo_items>", $promo_items, $page_content);
 
         return view('web.page', [
             'page_content' => $page_content,

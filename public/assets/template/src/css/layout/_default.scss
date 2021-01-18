@@ -17,6 +17,10 @@ body {
 }
 * {
     font-family: 'Noto Sans TC', sans-serif;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none !important;
+    }
 }
 
 .pc {

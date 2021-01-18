@@ -81,6 +81,14 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
         // 推廣表單
         Route::get('/promote_form', 'PromoteFormController@index');
 
+        // 促銷活動
+        Route::get('/promo_management', 'PromoManagementController@index');
+        Route::post('/promo_management', 'PromoManagementController@index');
+        Route::get('/promo_management/create', 'PromoManagementController@createPage');
+        Route::post('/promo_management/create', 'PromoManagementController@create');
+        Route::get('/promo_management/edit/{id}', 'PromoManagementController@editPage');
+        Route::post('/promo_management/edit', 'PromoManagementController@edit');
+
         // 行事曆區
         Route::get('/calendar', 'CalendarController@show');
 
