@@ -46,7 +46,7 @@ class PromoManagementService
 
         $request->validate($validateRules, $validateMessage);
 
-        $this->promoManagementRepo->insert($request->user_id, $request->title, $request->image_url);
+        $this->promoManagementRepo->insert($request->user_id, $request->title, $request->image_url, $request->isDefault);
     }
 
     public function getEditItem($id)
@@ -67,7 +67,7 @@ class PromoManagementService
 
         $request->validate($validateRules, $validateMessage);
 
-        return $this->promoManagementRepo->update($request->promo_id, $request->title, $request->image_url);
+        return $this->promoManagementRepo->update($request->promo_id, $request->title, $request->image_url, $request->isDefault);
     }
 
     public function enableSite($site_id, $enable)

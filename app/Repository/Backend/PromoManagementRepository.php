@@ -25,16 +25,17 @@ class PromoManagementRepository
         return $models;
     }
 
-    public function insert($user_id, $title, $image_url)
+    public function insert($user_id, $title, $image_url, $isDefault)
     {
         $model = new PromoManagement;
         $model->user_id = $user_id;
         $model->title = $title;
-        $model->image = $image_url;
+        $model->image_url = $image_url;
+        $model->isDefault = $isDefault;
         $model->save();
     }
 
-    public function update($promo_id, $title, $image_url)
+    public function update($promo_id, $title, $image_url, $isDefault)
     {
         $model = PromoManagement::find($promo_id);
         $model->title = $title;
@@ -43,6 +44,7 @@ class PromoManagementRepository
             $model->image = $image_url;
         }
 
+        $model->isDefault = $isDefault;
         $model->save();
 
         return $model->promo_id;

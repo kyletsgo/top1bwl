@@ -77,8 +77,13 @@ class PageService
         $items = $this->promoManagementRepo->getAllPromo();
 
         $li_items = '';
+        $default_image_url = '';
         foreach ($items as $item) {
-            $li_items .= '<a class="swiper-slide sale__open" data-img="' . url($item->image) . '" href="javascript:void(0)">' . $item->title . '</a>';
+            $li_items .= '<a class="swiper-slide sale__open" data-img="' . url($item->image_url) . '" href="javascript:void(0)">' . $item->title . '</a>';
+
+            if ($item->isDefault === 1) {
+                $default_image_url = $item->image_url;
+            }
         }
 
         $menu_items = '<div class="sale">
@@ -86,7 +91,7 @@ class PageService
                     <div class="swiper-wrapper">'. $li_items .'</div>
                 </div>
                 <div class="sale__popup sale__popup--active" id="sale__popup">
-                    <div class="sale__box" id="sale__box" style="background-image: url(../../images/S__104251397.jpg)">
+                    <div class="sale__box" id="sale__box" style="background-image: url('.$default_image_url.')">
                         <a class="sale__close" id="sale__close" href="javascript:void(0)">
                             <span></span>
                             <span></span>

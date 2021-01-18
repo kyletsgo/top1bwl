@@ -31,7 +31,18 @@
 											<label class="error" for="promoImage"></label>
 										</div>
 										<div class="col-md-8 nopadding">
-											<img src="{{ url($row->image) }}" alt="promoImagePreview" width="500">
+											<img src="{{ url($row->image_url) }}" alt="promoImagePreview" width="500">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="header-require col-lg-2">預設顯示</td>
+									<td>
+										<div class="col-lg-3 nopadding">
+											<input type="radio" id="isDefaultY" name="isDefault" value="1" {{ ($row->isDefault === 1) ? 'checked' : '' }}>
+											<label for="isDefaultY">是</label>
+											<input type="radio" id="isDefaultN" name="isDefault" value="0" {{ ($row->isDefault === 0) ? 'checked' : '' }}>
+											<label for="isDefaultN">否</label>
 										</div>
 									</td>
 								</tr>

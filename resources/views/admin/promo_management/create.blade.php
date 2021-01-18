@@ -34,6 +34,17 @@
 										</div>
 									</td>
 								</tr>
+								<tr>
+									<td class="header-require col-lg-2">預設顯示</td>
+									<td>
+										<div class="col-lg-3 nopadding">
+											<input type="radio" id="isDefaultY" name="isDefault" value="1">
+											<label for="isDefaultY">是</label>
+											<input type="radio" id="isDefaultN" name="isDefault" value="0" checked>
+											<label for="isDefaultN">否</label>
+										</div>
+									</td>
+								</tr>
 								<!-- 下控制按鈕 -->
 								<tr>
 									<td>&nbsp;</td>

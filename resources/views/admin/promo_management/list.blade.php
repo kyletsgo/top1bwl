@@ -27,6 +27,7 @@
 							<th>編號</th>
 							<th>標題</th>
 							<th>圖片</th>
+							<th>預設</th>
 							<th>建立時間</th>
 							<th></th>
 						</tr>
@@ -36,7 +37,8 @@
 							<tr>
 								<td>{{ $rows->firstItem() + $key }}</td>
 								<td>{{ $row->title }}</td>
-								<td>{{ $row->image }}</td>
+								<td>{{ $row->image_url }}</td>
+								<td>{{ ($row->isDefault == 1) ? '是' : '否' }}</td>
 								<td>{{ $row->created_at }}</td>
 
 								<td style="text-align: right">
