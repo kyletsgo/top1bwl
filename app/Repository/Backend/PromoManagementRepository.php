@@ -41,7 +41,7 @@ class PromoManagementRepository
         $model->title = $title;
 
         if (!empty($image_url)) {
-            $model->image = $image_url;
+            $model->image_url = $image_url;
         }
 
         $model->isDefault = $isDefault;
