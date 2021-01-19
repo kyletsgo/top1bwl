@@ -93,7 +93,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
         Route::get('/calendar', 'CalendarController@show');
         Route::post('/calendar/edit', 'CalendarController@edit');
 
-        // Line 加好友設定
+        // Line/FB 加好友設定
         Route::get('/line_management/edit', 'LineManagementController@editPage');
         Route::post('/line_management/edit', 'LineManagementController@edit');
     });

@@ -41,13 +41,13 @@ class PageController extends Controller
         $page = $this->pageServ->getPage($page_id);
         $page_content = $page->content;
         $site_id = $page->site_id;
-        $add_friend_link = $this->lineManagementRepo->getLineLinkBySiteId($site_id);
+        list($line_friend_link, $fb_friend_link) = $this->lineManagementRepo->getLineLinkBySiteId($site_id);
         $site = $this->siteManagementRepo->getBySiteId($site_id);
 
         $menu_items = $this->pageServ->getMenuItemsHtml($folder_name);
         $calendar_item = $this->pageServ->getCalendarItemHtml();
         $form_item = $this->pageServ->getFormItemHtml();
-        $floatBtn_item = $this->pageServ->getFloatBtnItemHtml($add_friend_link);
+        $floatBtn_item = $this->pageServ->getFloatBtnItemHtml($line_friend_link, $fb_friend_link);
         $promo_items = $this->pageServ->getPromoItemHtml();
 
         $page_content = str_replace("<menu_items></menu_items>", $menu_items, $page_content);

@@ -7,18 +7,27 @@
 				{{ csrf_field() }}
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4 class="panel-title">編輯line加好友連結</h4>
+						<h4 class="panel-title">編輯加好友連結</h4>
 					</div>
 					<div class="panel-body">
 						<div>
 							<table class="table" cellspacing="0" style="border-collapse:collapse;">
 								<tbody>	
 									<tr>
-										<td class="header-require col-lg-2"><span style="color:red">*</span>line加好友連結</td>
+										<td class="header-require col-lg-2"><span style="color:red">*</span>Line 加好友連結</td>
 										<td>
 											<div class="col-lg-4 nopadding">
-												<input type="text" id="line_link" name="line_link" value="{{ $add_friend_link }}" maxlength="200" class="form-control">
+												<input type="text" id="line_link" name="line_link" value="{{ $line_friend_link }}" maxlength="200" class="form-control">
 												<label class="error" for="line_link"></label>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="header-require col-lg-2"><span style="color:red">*</span>FB 加好友連結</td>
+										<td>
+											<div class="col-lg-4 nopadding">
+												<input type="text" id="fb_link" name="fb_link" value="{{ $fb_friend_link }}" maxlength="200" class="form-control">
+												<label class="error" for="fb_link"></label>
 											</div>
 										</td>
 									</tr>
@@ -27,7 +36,7 @@
 										<td>&nbsp;</td>
 										<td>
 											<div style="text-align: right">			
-												<input type="submit" value="儲存" class="btn btn-primary btn-xs" onclick="submitForm();">
+												<input type="submit" value="更新" class="btn btn-primary btn-xs" onclick="submitForm();">
 											</div>
 										</td>
 									</tr>
@@ -46,45 +55,19 @@
 	<script>
 		$(function()
 		{
-			// jQuery Validation - start
-			$('#EditForm').validate();
-
-			$.validator.addMethod(
-					"regex",
-					function (value, element, regexp)
-					{
-						var re = new RegExp(regexp);
-						return this.optional(element) || re.test(value);
-					}
-			);
-
-			$('#line_link').rules("add",
-					{
-						required: true,
-						messages: {
-							required: "required"
-						}
-					});
-
-			// jQuery Validation - end
-
 		});
 
 		function submitForm()
 		{
-			if ($("#EditForm").valid() === false) {
-				return false;
-			} else {
-				$.blockUI({ css: {
-						border: 'none',
-						padding: '15px',
-						backgroundColor: '#000',
-						'-webkit-border-radius': '10px',
-						'-moz-border-radius': '10px',
-						opacity: .5,
-						color: '#fff'
-					}});
-			}
+			$.blockUI({ css: {
+					border: 'none',
+					padding: '15px',
+					backgroundColor: '#000',
+					'-webkit-border-radius': '10px',
+					'-moz-border-radius': '10px',
+					opacity: .5,
+					color: '#fff'
+				}});
 		}
 	</script>
 @endsection

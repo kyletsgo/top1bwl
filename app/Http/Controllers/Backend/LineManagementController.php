@@ -29,14 +29,16 @@ class LineManagementController extends Controller
         $user_id = Auth::user()->id;
         $row = $this->lineManagementRepo->getByUserId($user_id);
 
+        $line_friend_link = '';
+        $fb_friend_link = '';
         if (!is_null($row)) {
-            $add_friend_link = $row->add_friend_link;
-        } else {
-            $add_friend_link = '';
+            $line_friend_link = $row->line_friend_link;
+            $fb_friend_link = $row->fb_friend_link;
         }
 
         return view('admin.line_management.edit', [
-            'add_friend_link' => $add_friend_link,
+            'line_friend_link' => $line_friend_link,
+            'fb_friend_link' => $fb_friend_link,
         ]);
     }
 
@@ -48,7 +50,8 @@ class LineManagementController extends Controller
     {
         $user_id = Auth::user()->id;
         $line_link = $request->input('line_link');
-        $this->lineManagementRepo->updateByUserId($user_id, $line_link);
+        $fb_link = $request->input('fb_link');
+        $this->lineManagementRepo->updateByUserId($user_id, $line_link, $fb_link);
 
         return redirect('/backend/line_management/edit/');
     }
