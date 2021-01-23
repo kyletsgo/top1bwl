@@ -4,18 +4,21 @@ namespace App\Services\Web;
 
 use App\Repository\Backend\PageManagementRepository;
 use App\Repository\Backend\PromoManagementRepository;
-use App\Repository\Backend\PromoteFormRepository;
+use App\Repository\Backend\CalendarManagementRepository;
 
 class PageService
 {
     protected $pageManagementRepo;
     protected $promoManagementRepo;
+    protected $calendarManagementRepo;
 
     public function __construct(PageManagementRepository $siteManagementRepository,
-                                PromoManagementRepository $promoManagementRepository)
+                                PromoManagementRepository $promoManagementRepository,
+                                CalendarManagementRepository $calendarManagementRepository)
     {
         $this->pageManagementRepo = $siteManagementRepository;
         $this->promoManagementRepo = $promoManagementRepository;
+        $this->calendarManagementRepo = $calendarManagementRepository;
     }
 
     public function getPage($page_id)
@@ -36,6 +39,24 @@ class PageService
         $menu_items = '<div class="header__menu" id="menuList"><ul>' . $li_items . '</ul></div>';
 
         return $menu_items;
+    }
+
+    public function getCalendarItemHtml()
+    {
+        $item = $this->calendarManagementRepo->getCalendar();
+
+        return '<div class="images images__half">
+            <div class="images__content">
+                <picture>
+                    <!-- 手機版 -->
+                    <source srcset="' . url($item->image_small) . '" media="(max-width: 767.8px)">
+                    <!-- 電腦版 -->
+                    <source srcset="' . url($item->image_large) . '" media="(min-width: 768px)">
+                    <!-- 預設 -->
+                    <img src="/assets/template/images/banner1 (1).jpg">
+                </picture>
+            </div>
+        </div>';
     }
 
     public function getFormItemHtml()
@@ -62,12 +83,16 @@ class PageService
             </div>';
     }
 
-    public function getFloatBtnItemHtml($add_friend_link)
+    public function getFloatBtnItemHtml($line_friend_link, $fb_friend_link)
     {
         return '<div class="floatBtn">
-                    <a href="' . $add_friend_link . '">
+                    <a class="fb" href="' . $line_friend_link . '">
+                        <img src="/assets/template/images/facebook.png" alt="">
+                        <p>線上諮詢</p>
+                    </a>
+                    <a class="line" href="' . $fb_friend_link . '">
                         <img src="/assets/template/images/LINE_APP_RGB_20190219-02.png" alt="">
-                        <p>加好友</p>
+                        <p>線上諮詢</p>
                     </a>
                 </div>';
     }
@@ -79,7 +104,7 @@ class PageService
         $li_items = '';
         $default_image_url = '';
         foreach ($items as $item) {
-            $li_items .= '<a class="swiper-slide sale__open" data-img="' . url($item->image_url) . '" href="javascript:void(0)">' . $item->title . '</a>';
+            $li_items .= '<a class="swiper-slide sale__open" data-img="' . url($item->image_url) . '" href="javascript:void(0)">' . $item->title . '</a>' . "\n";
 
             if ($item->isDefault === 1) {
                 $default_image_url = $item->image_url;
@@ -93,8 +118,8 @@ class PageService
                 <div class="sale__popup sale__popup--active" id="sale__popup">
                     <div class="sale__box" id="sale__box" style="background-image: url('.$default_image_url.')">
                         <a class="sale__close" id="sale__close" href="javascript:void(0)">
-                            <span></span>
-                            <span></span>
+                            <span>&nbsp</span>
+                            <span>&nbsp</span>
                         </a>
                     </div>
                 </div>

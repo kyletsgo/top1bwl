@@ -11,6 +11,7 @@ class LineManagement extends Model
 
     protected $fillable = [
         'user_id',
-        'add_friend_link',
+        'line_friend_link',
+        'fb_friend_link',
     ];
 }
