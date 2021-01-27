@@ -77,6 +77,12 @@ class PageService
                             <label for="Line">Line：</label>
                             <input type="text" name="Line" id="Line" placeholder="請輸入Line ID">
                         </div>
+                        <div class="group__input">
+                            <div id="recaptcha-demo" class="g-recaptcha"
+                                 data-sitekey="6LduDz4aAAAAAHUVDMxEaaWKWLQpwJG1iy6l7cHH">
+                            </div>
+                            <script src="https://www.google.com/recaptcha/api.js"></script>
+                        </div>
                         <a class="group__submit" id="myFormSubmit" href="javascript:void(0)">送出</a>
                     </form>
                 </div>

@@ -70,6 +70,16 @@ class PageController extends Controller
         $line = $request->input('Line');
         $site_id = $request->input('site_id');
 
+        $recaptcha = new \ReCaptcha\ReCaptcha('6LduDz4aAAAAAPYRXcV4EJB9qSw8kSHwFZPhak65');
+        $resp = $recaptcha->verify($request->input('g-recaptcha-response'), $request->ip());
+        if (!$resp->isSuccess()) {
+            return response()->json([
+                'code' => 99,
+                'message' => '機器人驗證失敗，請重新再試。',
+                'data' => [],
+            ],200);
+        }
+
         // get username by site_id
         $user_site = $this->pageManagementRepo->getUserSiteBySiteId($site_id);
 
