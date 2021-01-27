@@ -26,7 +26,7 @@ class LineManagementRepository
     public function getLineLinkBySiteId($site_id)
     {
         $model = SiteManagement::select('top1bwl_line_management.line_friend_link', 'top1bwl_line_management.fb_friend_link')
-            ->join('top1bwl_line_management', 'top1bwl_line_management.user_id', '=', 'top1bwl_line_management.user_id')
+            ->join('top1bwl_line_management', 'top1bwl_site_management.user_id', '=', 'top1bwl_line_management.user_id')
             ->where('site_id', $site_id)
             ->first();
 
