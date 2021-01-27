@@ -6,6 +6,8 @@
  * For the official documentation visit https://ckeditor.com/docs/ckfinder/ckfinder3-php/
  */
 
+session_start();
+
 /*============================ PHP Error Reporting ====================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/debugging.html
 
@@ -32,8 +34,8 @@ $config['authentication'] = function () {
 /*============================ License Key ============================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_licenseKey
 
-$config['licenseName'] = '';
-$config['licenseKey']  = '';
+$config['licenseName'] = 'BWL Dev1';
+$config['licenseKey']  = 'MEEG-CV9R-7QL8-885M-8EXL-SX2L-QGNL';
 
 /*============================ CKFinder Internal Directory ============================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_privateDir
@@ -78,14 +80,14 @@ $config['backends'][] = array(
 
 $config['defaultResourceTypes'] = '';
 
-$config['resourceTypes'][] = array(
-    'name'              => 'Files', // Single quotes not allowed.
-    'directory'         => 'files',
-    'maxSize'           => 0,
-    'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
-    'deniedExtensions'  => '',
-    'backend'           => 'default'
-);
+//$config['resourceTypes'][] = array(
+//    'name'              => 'Files', // Single quotes not allowed.
+//    'directory'         => 'files',
+//    'maxSize'           => 0,
+//    'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
+//    'deniedExtensions'  => '',
+//    'backend'           => 'default'
+//);
 
 $config['resourceTypes'][] = array(
     'name'              => 'Images',
@@ -120,6 +122,44 @@ $config['accessControl'][] = array(
     'IMAGE_RESIZE'        => true,
     'IMAGE_RESIZE_CUSTOM' => true
 );
+
+//$config['accessControl'][] = Array(
+//    'role' => '*',
+//    'resourceType' => '*',
+//    'folder' => '/',
+//
+//    'FOLDER_VIEW'        => true,
+//    'FOLDER_CREATE'      => false,
+//    'FOLDER_RENAME'      => false,
+//    'FOLDER_DELETE'      => false,
+//
+//    'FILE_VIEW'          => true,
+//    'FILE_CREATE'        => false,
+//    'FILE_RENAME'        => false,
+//    'FILE_DELETE'        => false,
+//
+//    'IMAGE_RESIZE'        => false,
+//    'IMAGE_RESIZE_CUSTOM' => false
+//);
+//
+//$config['accessControl'][] = Array(
+//    'role' => 'user1',
+//    'resourceType' => '*',
+//    'folder' => '/',
+//
+//    'FOLDER_VIEW'        => true,
+//    'FOLDER_CREATE'      => true,
+//    'FOLDER_RENAME'      => true,
+//    'FOLDER_DELETE'      => true,
+//
+//    'FILE_VIEW'          => true,
+//    'FILE_CREATE'        => true,
+//    'FILE_RENAME'        => true,
+//    'FILE_DELETE'        => true,
+//
+//    'IMAGE_RESIZE'        => true,
+//    'IMAGE_RESIZE_CUSTOM' => true
+//);
 
 
 /*================================ Other Settings =====================================*/
@@ -157,7 +197,10 @@ $config['cache'] = array(
 /*============================ Temp Directory settings ================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_tempDirectory
 
+// Development (Linux)
 //$config['tempDirectory'] = sys_get_temp_dir();
+
+// Production (Windows)
 $config['tempDirectory'] = __DIR__ . '/userfiles/.ckfinder/temp';
 
 /*============================ Session Cause Performance Issues =======================*/

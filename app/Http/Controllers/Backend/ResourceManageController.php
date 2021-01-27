@@ -26,6 +26,9 @@ class ResourceManageController extends Controller
      */
     public function ckfinder()
     {
+        session_start();
+        $_SESSION['CKFinder_UserRole'] = 'administrator';
+
         return view('admin.resource_manage.ckfinder',[
         ]);
     }
