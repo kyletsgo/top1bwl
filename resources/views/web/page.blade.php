@@ -58,6 +58,12 @@
                 dataType: 'json',
                 success: function (_result) {
                     console.log(_result);
+
+                    if (_result.code !== 0) {
+                        alert('表單送出失敗');
+                        return;
+                    }
+
                     alert('表單送出成功');
                     location.reload();
                 },
