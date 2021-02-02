@@ -31,6 +31,7 @@
 							<th>名稱</th>
 							<th>帳號</th>
 							<th>權限</th>
+							<th>所屬代理管理員</th>
 							<th>建立時間</th>
 							<th>更新時間</th>
 							<th></th>
@@ -43,6 +44,7 @@
 								<td>{{ $row->nickname }}</td>
 								<td>{{ $row->username }}</td>
 								<td>{{ $BackendPresenter->convertUserRole($row->role) }}</td>
+								<td>{{ $row->parent_username }}</td>
 								<td>{{ $row->created_at }}</td>
 								<td>{{ $row->updated_at }}</td>
 								<td style="text-align: right">

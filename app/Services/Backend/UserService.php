@@ -16,7 +16,7 @@ class UserService
         $this->userRepo = $userRepository;
     }
 
-    public function searchList($username, $pageLimit = 0)
+    public function searchList($username = '', $pageLimit = 0)
     {
         return $this->userRepo->search($username, $pageLimit);
     }
@@ -32,7 +32,7 @@ class UserService
         return $input;
     }
 
-    public function createItem(Request $request)
+    public function createItem(Request $request, $current_user)
     {
         $validateRules = [
             'nickname' => 'max:100',
@@ -52,7 +52,13 @@ class UserService
 
         $request->validate($validateRules, $validateMessage);
 
-        return $this->userRepo->insert($request->nickname, $request->username, $request->password);
+        if ($current_user->role === 3) {
+            $parent_user_id = $current_user->id;
+        } else {
+            $parent_user_id = null;
+        }
+
+        return $this->userRepo->insert($request->nickname, $request->username, $request->password, $parent_user_id);
     }
 
     public function getEditItem($id)

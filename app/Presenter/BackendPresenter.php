@@ -44,25 +44,24 @@ class BackendPresenter
 
         switch ($user_role) {
             case 1: // 一般會員
-                if ($row_role === 1) {
-                    $html = $a;
-                }
+                $html = $a;
                 break;
             case 2: // 管理員
-                if ($row_role === 2) {
+                if ($row_role === 1) {
+                    $html = $a . $b . $c;
+                } else if ($row_role === 2) {
                     $html = $a;
+                } else if ($row_role === 3) {
+                    $html = $a . $b;
                 }
                 break;
             case 3: // 代理管理員
+                if ($row_role === 1) {
+                    $html = $a . $b;
+                } else if ($row_role === 3) {
+                    $html = $a;
+                }
                 break;
-        }
-
-        if (empty($html)) {
-            if ($row_role == 1) {
-                $html = $a . $b . $c;
-            } else {
-                $html = $a . $b;
-            }
         }
 
         return $html;

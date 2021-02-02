@@ -4,20 +4,22 @@ namespace App\Repository\Backend;
 
 use App\User;
 use App\Group;
+use DB;
 
 class UserRepository
 {
     public function search($username, $pageLimit)
     {
-//        \DB::enableQueryLog();
+//        DB::enableQueryLog();
 
-        $query = User::select('*');
+        $query = DB::table('users as u1')->select('u1.*', 'u2.username as parent_username')
+            ->leftJoin('users AS u2', 'u1.parent_user_id', '=', 'u2.id');
 
         if (!empty($username)) {
-            $query->where('username', $username);
+            $query->where('u1.username', $username);
         }
 
-        $query->orderBy('id', 'asc');
+        $query->orderBy('u1.id', 'asc');
 
         if ($pageLimit === 0) {
             $models = $query->get();
@@ -25,17 +27,18 @@ class UserRepository
             $models = $query->paginate($pageLimit);
         }
 
-//        \Log::debug(\DB::getQueryLog());
+//        \Log::debug(DB::getQueryLog());
 
         return $models;
     }
 
-    public function insert($nickname, $username, $password)
+    public function insert($nickname, $username, $password, $parent_user_id)
     {
         $user = new User();
         $user->nickname = $nickname;
         $user->username = $username;
         $user->password = bcrypt($password);
+        $user->parent_user_id = $parent_user_id;
         $user->save();
 
         return $user;

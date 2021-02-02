@@ -10,7 +10,7 @@
 	@endif
 <div class="row">
 	<div class="col-lg-12">
-		<form id="EditForm" class="form-horizontal" method="post" action="/backend/user/{{ $row->id }}">
+		<form id="EditForm" class="form-horizontal" method="post" action="/backend/user/edit/{{ $row->id }}">
 			{{ csrf_field() }}
 			<div class="panel panel-primary">
 				<div class="panel-heading">

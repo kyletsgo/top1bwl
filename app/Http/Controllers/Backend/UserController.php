@@ -29,18 +29,19 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        // 取得登入的會員
         $user_id = Auth::user()->id;
-        $user = $this->userRepo->getById($user_id);
+        $current_user = $this->userRepo->getById($user_id);
 
-        if ($this->userSv->isAdminUser($user_id)) {
-            $rows = $this->userSv->searchList('');
+        if ($current_user->role === 1) {
+            $rows = $this->userSv->searchList($current_user->username);
         } else {
-            $rows = $this->userSv->searchList($user->username);
+            $rows = $this->userSv->searchList();
         }
 
-        if ($user->role != 2) {
-            $filtered_rows = $rows->filter(function ($item) {
-                return $item->role != 2;
+        if ($current_user->role === 3) {
+            $filtered_rows = $rows->filter(function ($item) use ($user_id) {
+                return ($item->id === $user_id) || ($item->parent_user_id === $user_id);
             });
         } else {
             $filtered_rows = $rows;
@@ -49,7 +50,7 @@ class UserController extends Controller
         return view('admin.user.list', [
             'rows' => $filtered_rows,
             'cond' => $request,
-            'user_role' => $user->role,
+            'user_role' => $current_user->role,
         ]);
     }
 
@@ -66,8 +67,12 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
+        // 取得登入的會員
+        $user_id = Auth::user()->id;
+        $current_user = $this->userRepo->getById($user_id);
+
         // 新增會員
-        $user = $this->userSv->createItem($request);
+        $user = $this->userSv->createItem($request, $current_user);
 
         // 新增至一般會員群組
         $this->userSv->addUserToGroup($user->id, 1);
@@ -116,6 +121,9 @@ class UserController extends Controller
         ],200);
     }
 
+    /**
+     * 下放權限
+     */
     public function releaseAuth(Request $request)
     {
         $userId = $request->input('userId');
