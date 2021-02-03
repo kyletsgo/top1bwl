@@ -14,7 +14,7 @@
 							<form method="post" action="" name="searchFrom">
 								{{ csrf_field() }}
 								<div class="form-group">
-									@if ($user_role !== 1)
+									@if ($current_user_role !== 1)
 										<a class="btn btn-darkblue btn-xs" href="/backend/user/create">
 											<i class="fas fa-plus"></i><strong>新增</strong>
 										</a>
@@ -38,9 +38,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($rows as $row)
+					@foreach($rows as $key => $row)
 							<tr>
-								<td>{{ $row->id }}</td>
+								<td>{{ $rows->firstItem() + $key }}</td>
 								<td>{{ $row->nickname }}</td>
 								<td>{{ $row->username }}</td>
 								<td>{{ $BackendPresenter->convertUserRole($row->role) }}</td>
@@ -48,13 +48,15 @@
 								<td>{{ $row->created_at }}</td>
 								<td>{{ $row->updated_at }}</td>
 								<td style="text-align: right">
-									{!! $BackendPresenter->showUserControl($user_role, $row->role, $row->id) !!}
+									{!! $BackendPresenter->showUserControl($current_user_role, $row) !!}
 								</td>
 							</tr>
-						@endforeach
+
+					@endforeach
 					</tbody>
 				</table>
 				<div class="col-md-12 text-center no-margin">
+					{{ $rows->links() }}
 				</div>
 			</div>
 		</div>

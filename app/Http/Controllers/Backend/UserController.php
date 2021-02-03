@@ -33,24 +33,12 @@ class UserController extends Controller
         $user_id = Auth::user()->id;
         $current_user = $this->userRepo->getById($user_id);
 
-        if ($current_user->role === 1) {
-            $rows = $this->userSv->searchList($current_user->username);
-        } else {
-            $rows = $this->userSv->searchList();
-        }
-
-        if ($current_user->role === 3) {
-            $filtered_rows = $rows->filter(function ($item) use ($user_id) {
-                return ($item->id === $user_id) || ($item->parent_user_id === $user_id);
-            });
-        } else {
-            $filtered_rows = $rows;
-        }
+        $rows = $this->userSv->searchList($current_user, $request, 15);
 
         return view('admin.user.list', [
-            'rows' => $filtered_rows,
+            'rows' => $rows,
             'cond' => $request,
-            'user_role' => $current_user->role,
+            'current_user_role' => $current_user->role,
         ]);
     }
 

@@ -6,18 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Backend\SiteManagementService;
 use App\Services\Backend\UserService;
+use App\Repository\Backend\UserRepository;
 use Auth;
 
 class SiteManagementController extends Controller
 {
     protected $siteManagementServ;
     protected $userSv;
+    protected $userRepo;
 
     public function __construct(SiteManagementService $siteManagementService,
-                                UserService $userService)
+                                UserService $userService,
+                                UserRepository $userRepository)
     {
         $this->siteManagementServ = $siteManagementService;
         $this->userSv = $userService;
+        $this->userRepo = $userRepository;
     }
 
     /**
@@ -25,19 +29,16 @@ class SiteManagementController extends Controller
      */
     public function index(Request $request)
     {
+        // 取得登入的會員
         $user_id = Auth::user()->id;
-        $isAdmin = $this->userSv->isAdminUser($user_id);
+        $current_user = $this->userRepo->getById($user_id);
 
-        if (!$isAdmin) {
-            $request->user_id = $user_id;
-        }
-
-        $rows = $this->siteManagementServ->searchList($request, 15);
+        $rows = $this->siteManagementServ->searchList($current_user, $request, 15);
 
         return view('admin.site_management.list', [
             'rows' => $rows,
             'cond' => $request,
-            'isAdmin' => $isAdmin,
+            'current_user_role' => $current_user->role,
         ]);
     }
 

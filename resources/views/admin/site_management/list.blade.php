@@ -1,4 +1,5 @@
 @extends('admin.master')
+@inject('BackendPresenter', 'App\Presenter\BackendPresenter')
 
 @section('content')
 	<div class="row">
@@ -44,7 +45,7 @@
 							<th>站名</th>
 							<th>標題</th>
 							<th>敘述</th>
-							<th>Keywords</th>
+							<th>關鍵字</th>
 							<th>生成狀態</th>
 							<th>建立時間</th>
 							<th></th>
@@ -62,20 +63,8 @@
 								<td>{{ $row->og_meta }}</td>
 								<td>{{ $row->enable === 1 ? '已生成' : '未生成' }}</td>
 								<td>{{ $row->created_at }}</td>
-
 								<td style="text-align: right">
-									<a class="btn btn-warning btn-xs" href="/backend/site_management/edit/{{ $row->site_id }}">
-										<strong>編輯</strong>
-									</a>
-									@if ($row->enable !== 0)
-										<a class="btn btn-info btn-xs" href="/backend/page_manage/">
-											<strong>前往建立網頁</strong>
-										</a>
-									@elseif ($isAdmin === true)
-										<button type="button" class="btn btn-success btn-xs enableSite" data-siteid="{{ $row->site_id }}">
-											<strong>生成網站</strong>
-										</button>
-									@endif
+									{!! $BackendPresenter->showSiteControl($current_user_role, $row) !!}
 								</td>
 							</tr>
 						@endforeach

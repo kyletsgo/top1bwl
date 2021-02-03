@@ -8,15 +8,24 @@ use DB;
 
 class UserRepository
 {
-    public function search($username, $pageLimit)
+    public function search($current_user, $request, $pageLimit)
     {
 //        DB::enableQueryLog();
 
         $query = DB::table('users as u1')->select('u1.*', 'u2.username as parent_username')
             ->leftJoin('users AS u2', 'u1.parent_user_id', '=', 'u2.id');
 
-        if (!empty($username)) {
-            $query->where('u1.username', $username);
+        // 一般會員顯示 自己的
+        if ($current_user->role === 1) {
+            $query->where('u1.id', $current_user->id);
+        }
+
+        // 代理管理員顯示 自己+自己所生成的一般會員
+        if ($current_user->role === 3) {
+            $query->where(function($q) use ($current_user) {
+                $q->where('u1.id', $current_user->id)
+                    ->orWhere('u1.parent_user_id', $current_user->id);
+            });
         }
 
         $query->orderBy('u1.id', 'asc');

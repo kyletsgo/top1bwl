@@ -17,13 +17,13 @@ class SiteManagementService
         $this->siteManagementRepo = $siteManagementRepository;
     }
 
-    public function searchList(Request $request, $pageLimit = 0)
+    public function searchList($current_user, Request $request, $pageLimit = 0)
     {
         $request->username = $this->setCookie($request->username, 'b_sitemanagement_username');
         $request->folder_name = $this->setCookie($request->folder_name, 'b_sitemanagement_folder_name');
         $request->enable = $this->setCookie($request->enable, 'b_sitemanagement_enable');
 
-        return $this->siteManagementRepo->search($request->username, $request->folder_name, $request->enable, $request->user_id, $pageLimit);
+        return $this->siteManagementRepo->search($current_user, $request->username, $request->folder_name, $request->enable, $pageLimit);
     }
 
     private function setCookie($input, $cookie)
