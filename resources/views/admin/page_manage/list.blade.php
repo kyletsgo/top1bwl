@@ -13,7 +13,9 @@
 							<form method="post" action="{{ asset('/backend/page_manage') }}" name="searchFrom">
 								{{ csrf_field() }}
 								<div class="form-group">
+									@if ($current_user_site_enable === 1)
 									<a class="btn btn-darkblue btn-xs" href="/backend/page_manage/create_select_template">新增網頁</a>
+									@endif
 								</div>
 							</form>
                         </div>
@@ -31,7 +33,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					@if ($user_role === 1 && $site_enabled === 0)
+					@if ($current_user_role === 1 && $current_user_site_enable === 0)
 						<tr>
 							<td>
 								網站未生成，請洽管理員。
@@ -50,6 +52,9 @@
 									<a class="btn btn-warning btn-xs" href="/backend/page_manage/edit/{{ $row->page_id }}">
 										<strong>編輯</strong>
 									</a>
+									<button type="button" class="btn btn-danger btn-xs deleteItem" data-itemId="{{ $row->page_id }}">
+										<strong>刪除</strong>
+									</button>
 								</td>
 							</tr>
 						@endforeach
@@ -66,6 +71,36 @@
 	<script>
 		$(function ()
 		{
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+
+			$('.deleteItem').click(function () {
+				if (confirm("確認要刪除") !== true) {
+					return;
+				}
+
+				$.ajax({
+					'type': "POST",
+					'url': '/backend/page_manage/delete',
+					data: {
+						'itemId': $(this).attr('data-itemId')
+					},
+					dataType: 'json',
+					success: function (result) {
+						console.log(result);
+
+						if (result.code === 0) {
+							location.reload();
+						}
+					},
+					error: function (e) {
+						console.log(e);
+					}
+				});
+			});
         });
     </script>
 @endsection

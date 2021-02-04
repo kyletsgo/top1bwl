@@ -6,18 +6,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Backend\ResourceManagementService;
 use App\Services\Backend\UserService;
+use App\Repository\Backend\UserRepository;
+use App\Repository\Backend\ResourceManagementRepository;
 use Auth;
 
 class ResourceManageController extends Controller
 {
     protected $resourceManagementSv;
     protected $userSv;
+    protected $userRepo;
+    protected $resourceManagementRepo;
 
     public function __construct(ResourceManagementService $resourceManagementService,
-                                UserService $userService)
+                                UserService $userService,
+                                UserRepository $userRepository,
+                                ResourceManagementRepository $resourceManagementRepository)
     {
         $this->resourceManagementSv = $resourceManagementService;
         $this->userSv = $userService;
+        $this->userRepo = $userRepository;
+        $this->resourceManagementRepo = $resourceManagementRepository;
     }
 
     /**
@@ -38,12 +46,18 @@ class ResourceManageController extends Controller
      */
     public function index(Request $request)
     {
+        // 取得登入的會員
         $user_id = Auth::user()->id;
-        $rows = $this->resourceManagementSv->searchList($user_id, 15);
+        $current_user = $this->userRepo->getById($user_id);
+
+        // 顯示所有
+        $rows = $this->resourceManagementSv->searchList(15);
 
         return view('admin.resource_manage.list', [
             'rows' => $rows,
             'cond' => $request,
+            'current_user_role' => $current_user->role,
+            'current_user_id' => $current_user->id,
         ]);
     }
 
@@ -72,10 +86,16 @@ class ResourceManageController extends Controller
      */
     public function editPage($id)
     {
+        // 取得登入的會員
+        $user_id = Auth::user()->id;
+        $current_user = $this->userRepo->getById($user_id);
+
         $row = $this->resourceManagementSv->getEditItem($id);
 
         return view('admin.resource_manage.edit', [
-            'row' => $row
+            'row' => $row,
+            'current_user_role' => $current_user->role,
+            'current_user_id' => $current_user->id,
         ]);
     }
 
@@ -88,5 +108,21 @@ class ResourceManageController extends Controller
         $id = $this->resourceManagementSv->updateItem($request, $id);
 
         return redirect('/backend/resource_manage/edit/' . $id);
+    }
+
+    /**
+     * 刪除
+     */
+    public function delete(Request $request)
+    {
+        $itemId = $request->input('itemId');
+
+        $this->resourceManagementRepo->delete($itemId);
+
+        return response()->json([
+            'code' => 0,
+            'message' => 'ok',
+            'data' => [],
+        ],200);
     }
 }

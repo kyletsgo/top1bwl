@@ -6,16 +6,27 @@ use App\PageManagement;
 use App\SiteManagement;
 use App\Template;
 use App\PromoteForm;
-use App\User;
 
 class PageManagementRepository
 {
-    public function search($site_id, $pageLimit)
+    public function search($current_user, $pageLimit)
     {
-        $query = PageManagement::select('*');
+        $query = PageManagement::select('top1bwl_page_management.*', 'top1bwl_site_management.folder_name'
+            , 'users.nickname');
+        $query->join('top1bwl_site_management', 'top1bwl_page_management.site_id', '=', 'top1bwl_site_management.site_id');
+        $query->join('users', 'top1bwl_site_management.user_id', '=', 'users.id');
 
-        if ($site_id !== 0) {
-            $query->where('site_id', $site_id);
+        // 一般會員顯示 自己的
+        if ($current_user->role === 1) {
+            $query->where('top1bwl_site_management.user_id', $current_user->id);
+        }
+
+        // 代理管理員顯示 自己+自己所生成的一般會員
+        if ($current_user->role === 3) {
+            $query->where(function($q) use ($current_user) {
+                $q->where('top1bwl_site_management.user_id', $current_user->id)
+                    ->orWhere('users.parent_user_id', $current_user->id);
+            });
         }
 
         $query->orderBy('page_id', 'asc');
@@ -46,6 +57,12 @@ class PageManagementRepository
         $model->save();
 
         return $model->page_id;
+    }
+
+    public function delete($id)
+    {
+        $model = PageManagement::find($id);
+        $model->delete();
     }
 
     public function getById($id)

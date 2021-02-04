@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Repository\Backend\UserRepository;
 use Illuminate\Http\Request;
 use Auth;
 use Storage;
@@ -11,18 +12,26 @@ use App\Repository\Backend\CalendarManagementRepository;
 class CalendarController extends Controller
 {
     protected $calendarManagementRepo;
+    protected $userRepo;
 
-    public function __construct(CalendarManagementRepository $calendarManagementRepository)
+    public function __construct(CalendarManagementRepository $calendarManagementRepository,
+                                UserRepository $userRepository)
     {
         $this->calendarManagementRepo = $calendarManagementRepository;
+        $this->userRepo = $userRepository;
     }
 
     public function show()
     {
+        // 取得登入的會員
+        $user_id = Auth::user()->id;
+        $current_user = $this->userRepo->getById($user_id);
+
         $row = $this->calendarManagementRepo->getById(1);
 
         return view('admin.calendar.show', [
-            'row' => $row
+            'row' => $row,
+            'current_user_role' => $current_user->role,
         ]);
     }
 

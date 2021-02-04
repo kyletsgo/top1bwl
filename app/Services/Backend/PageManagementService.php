@@ -17,9 +17,9 @@ class PageManagementService
         $this->pageManagementRepo = $siteManagementRepository;
     }
 
-    public function searchList($site_id, $pageLimit)
+    public function searchList($current_user, Request $request, $pageLimit = 0)
     {
-        return $this->pageManagementRepo->search($site_id, $pageLimit);
+        return $this->pageManagementRepo->search($current_user, $pageLimit);
     }
 
     private function setCookie($input, $cookie)
@@ -58,6 +58,11 @@ class PageManagementService
         $request->validate($validateRules, $validateMessage);
 
         return $this->pageManagementRepo->update($request->page_id, $request->input('title'), $request->input('content'));
+    }
+
+    public function deleteItem($id)
+    {
+        $this->pageManagementRepo->delete($id);
     }
 
 }

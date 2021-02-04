@@ -44,38 +44,23 @@ class PageManageController extends Controller
      * 列表頁
      *
      */
-    public function index()
+    public function index(Request $request)
     {
+        // 取得登入的會員
         $user_id = Auth::user()->id;
-        $user = $this->userRepo->getById($user_id);
+        $current_user = $this->userRepo->getById($user_id);
+        $current_user_site = $this->siteManagementRepo->getByUserId($user_id);
 
-        $site = $this->siteManagementRepo->getByUserId($user_id);
-        $site_enabled = $site->enable;
+        $rows = $this->pageManagementServ->searchList($current_user, $request, 15);
 
-        if ($this->userSv->isAdminUser($user_id)) {
-            $rows = $this->pageManagementServ->searchList(0, 15);
-        } else {
-            $site_id = $site->site_id;
-            $rows = $this->pageManagementServ->searchList($site_id, 15);
-        }
-
-        if (!$rows->isEmpty()) {
-            foreach ($rows as &$row) {
-                $site_id = $row->site_id;
-                $site = $this->siteManagementRepo->getById($site_id);
-
-                $user = $this->userRepo->getById($site->user_id);
-                $row->nickname = $user->nickname;
-
-//            $row->url = "http://localhost:8888/page/$folder_name/$row->page_id";
-                $row->url = "https://realleaftaiwan.our-work.com.tw/page/$site->folder_name/$row->page_id";
-            }
+        foreach ($rows as &$row) {
+            $row->url = "https://realleaftaiwan.our-work.com.tw/page/$row->folder_name/$row->page_id";
         }
 
         return view('admin.page_manage.list', [
             'rows' => $rows,
-            'user_role' => $user->role,
-            'site_enabled' => $site_enabled,
+            'current_user_role' => $current_user->role,
+            'current_user_site_enable' => $current_user_site->enable,
         ]);
     }
 
@@ -374,6 +359,22 @@ class PageManageController extends Controller
             'code' => 0,
             'message' => 'ok',
             'data' => ['ck_template' => $ck_template],
+        ],200);
+    }
+
+    /**
+     * 刪除
+     */
+    public function delete(Request $request)
+    {
+        $itemId = $request->input('itemId');
+
+        $this->pageManagementServ->deleteItem($itemId);
+
+        return response()->json([
+            'code' => 0,
+            'message' => 'ok',
+            'data' => [],
         ],200);
     }
 

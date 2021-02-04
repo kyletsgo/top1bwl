@@ -6,14 +6,10 @@ use App\ResourceArticleManagement;
 
 class ResourceManagementRepository
 {
-    public function search($user_id, $pageLimit)
+    public function search($pageLimit)
     {
-        $query = ResourceArticleManagement::select('top1bwl_article_management.*', 'users.nickname');
+        $query = ResourceArticleManagement::select('top1bwl_article_management.*', 'users.nickname', 'users.id as user_id');
         $query->join('users', 'top1bwl_article_management.user_id', '=', 'users.id');
-
-        if (!is_null($user_id)) {
-            $query->where('user_id', $user_id);
-        }
 
         $query->orderBy('article_id', 'asc');
 
@@ -47,7 +43,9 @@ class ResourceManagementRepository
 
     public function getById($id)
     {
-        return ResourceArticleManagement::find($id);
+        $query = ResourceArticleManagement::select('top1bwl_article_management.*', 'users.id as user_id');
+        $query->join('users', 'top1bwl_article_management.user_id', '=', 'users.id');
+        return $query->find($id);
     }
 
     public function getFromUsers($user_ids)
@@ -60,5 +58,11 @@ class ResourceManagementRepository
         $models = $query->get();
 
         return $models;
+    }
+
+    public function delete($id)
+    {
+        $model = ResourceArticleManagement::find($id);
+        $model->delete();
     }
 }

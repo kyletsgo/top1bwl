@@ -16,8 +16,8 @@ class PromoteFormService
         $this->siteManagementRepo = $siteManagementRepository;
     }
 
-    public function searchList($username, $pageLimit = 0)
+    public function searchList($current_user, $pageLimit = 0)
     {
-        return $this->siteManagementRepo->search($username, $pageLimit);
+        return $this->siteManagementRepo->search($current_user, $pageLimit);
     }
 }

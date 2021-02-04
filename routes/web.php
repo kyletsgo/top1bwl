@@ -61,12 +61,14 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
         // 資源管理
         Route::get('/resource_manage/ckfinder', 'ResourceManageController@ckfinder');
 
+        // 文章管理
         Route::get('/resource_manage', 'ResourceManageController@index');
         Route::post('/resource_manage', 'ResourceManageController@index');
         Route::get('/resource_manage/create', 'ResourceManageController@createPage');
         Route::post('/resource_manage/create', 'ResourceManageController@create');
         Route::get('/resource_manage/edit/{id}', 'ResourceManageController@editPage');
         Route::post('/resource_manage/edit/{id}', 'ResourceManageController@edit');
+        Route::post('/resource_manage/delete', 'ResourceManageController@delete');
 
         // 網頁管理
         Route::get('/page_manage', 'PageManageController@index');
@@ -77,6 +79,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
         Route::get('/page_manage/edit/{id}', 'PageManageController@editPage');
         Route::post('/page_manage/edit', 'PageManageController@edit');
         Route::get('/page_manage/get-template', 'PageManageController@getTemplate');
+        Route::post('/page_manage/delete', 'PageManageController@delete');
 
         // 推廣表單
         Route::get('/promote_form', 'PromoteFormController@index');

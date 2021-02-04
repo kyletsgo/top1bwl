@@ -64,6 +64,7 @@
         var editor = CKEDITOR.replace( 'content', {
 			width : '100%',
 			height : 800,
+            filebrowserUploadUrl : null,
 			extraPlugins : 'stylesheetparser',
 			contentsCss : [ '/assets/template/dist/css/index.min.css?v=20201201' , 'https://unpkg.com/swiper/swiper-bundle.min.css'],
 			stylesSet : [],
@@ -91,7 +92,9 @@
             }
 		});
 
-        CKFinder.setupCKEditor(editor);
+        CKFinder.setupCKEditor(editor, {
+            readOnly: true
+        } );
 
         // jQuery Validation - start
         $('#EditForm').validate();

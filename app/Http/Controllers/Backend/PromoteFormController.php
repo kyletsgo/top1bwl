@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 use App\Services\Backend\PromoteFormService;
 use App\Repository\Backend\UserRepository;
 use App\Services\Backend\UserService;
@@ -28,16 +28,13 @@ class PromoteFormController extends Controller
      * 列表頁
      *
      */
-    public function index()
+    public function index(Request $request)
     {
+        // 取得登入的會員
         $user_id = Auth::user()->id;
-        $user = $this->userRepo->getById($user_id);
+        $current_user = $this->userRepo->getById($user_id);
 
-        if ($this->userSv->isAdminUser($user_id)) {
-            $rows = $this->siteManagementServ->searchList('', 15);
-        } else {
-            $rows = $this->siteManagementServ->searchList($user->username, 15);
-        }
+        $rows = $this->siteManagementServ->searchList($current_user, 15);
 
         return view('admin.promote_form_manage.list', [
             'rows' => $rows,

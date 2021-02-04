@@ -17,13 +17,9 @@ class ResourceManagementService
         $this->resourceManagementRepo = $resourceManagementRepository;
     }
 
-    public function searchList($user_id, $pageLimit = 0)
+    public function searchList($pageLimit = 0)
     {
-        if ($user_id === 1) {
-            $user_id = null;
-        }
-
-        return $this->resourceManagementRepo->search($user_id, $pageLimit);
+        return $this->resourceManagementRepo->search($pageLimit);
     }
 
     private function setCookie($input, $cookie)

@@ -17,7 +17,7 @@
 										<td class="header-require col-lg-2"><span style="color:red">*</span>標題</td>
 										<td>
 											<div class="col-lg-4 nopadding">
-												<input type="text" id="title" name="title" value="{{ $row->title }}" maxlength="80" class="form-control">
+												<input type="text" id="title" name="title" value="{{ $row->title }}" maxlength="80" class="form-control" {{ (($current_user_role !== 2) && ($current_user_id !== $row->user_id)) ? 'readonly' : '' }}>
 												<label class="error" for="title"></label>
 											</div>
 										</td>
@@ -26,7 +26,7 @@
 										<td class="header-require col-lg-2"><span style="color:red">*</span>內容</td>
 										<td>
 											<div class="col-lg-8 nopadding">
-												<textarea id="content" name="content" class="form-control" rows="30" cols="30">{{ $row->content }}</textarea>
+												<textarea id="content" name="content" class="form-control" rows="30" cols="30" {{ (($current_user_role !== 2) && ($current_user_id !== $row->user_id)) ? 'readonly' : '' }}>{{ $row->content }}</textarea>
 												<label class="error" for="content"></label>
 											</div>
 										</td>
@@ -37,7 +37,9 @@
 										<td>
 											<div style="text-align: right">			
 												<a class="btn btn-xs btn-default" href="/backend/resource_manage">返回</a>
-												<input type="submit" value="更新" class="btn btn-primary btn-xs" onclick="submitForm();">
+												@if (($current_user_role === 2) || ($current_user_id === $row->user_id))
+													<input type="submit" value="更新" class="btn btn-primary btn-xs" onclick="submitForm();">
+												@endif
 											</div>
 										</td>
 									</tr>
