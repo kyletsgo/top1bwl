@@ -198,10 +198,10 @@ $config['cache'] = array(
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_tempDirectory
 
 // Development (Linux)
-$config['tempDirectory'] = sys_get_temp_dir();
+//$config['tempDirectory'] = sys_get_temp_dir();
 
 // Production (Windows)
-//$config['tempDirectory'] = __DIR__ . '/userfiles/.ckfinder/temp';
+$config['tempDirectory'] = __DIR__ . '/userfiles/.ckfinder/temp';
 
 /*============================ Session Cause Performance Issues =======================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_sessionWriteClose
