@@ -33,7 +33,8 @@ class PageService
         $li_items = '';
         foreach ($pages as $page) {
 //            $li_items .= '<li>' . '<a href="http://localhost:8888/page/'. $folder_name . '/' . $page->page_id . '">' . $page->title . '</a> ' . '</li>';
-            $li_items .= '<li>' . '<a href="https://realleaftaiwan.our-work.com.tw/page/'. $folder_name . '/' . $page->page_id . '">' . $page->title . '</a> ' . '</li>';
+//            $li_items .= '<li>' . '<a href="https://realleaftaiwan.our-work.com.tw/page/'. $folder_name . '/' . $page->page_id . '">' . $page->title . '</a> ' . '</li>';
+            $li_items .= '<li>' . '<a href="https://www.top1bwl.com/page/'. $folder_name . '/' . $page->page_id . '">' . $page->title . '</a> ' . '</li>';
         }
 
         $menu_items = '<div class="header__menu" id="menuList"><ul>' . $li_items . '</ul></div>';
