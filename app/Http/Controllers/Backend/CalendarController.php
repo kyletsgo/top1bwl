@@ -43,9 +43,10 @@ class CalendarController extends Controller
     {
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
-        
+
         $image_large = '';
         if ($request->hasFile('largeImage')) {
+            \Log::debug('okokok');
             $orig_image_name = 'calendar-largeImage-' . time() . '.jpg';
             $image_path = $request->largeImage->storeAs('calendar', $orig_image_name, 'public');
             $image_large = Storage::url($image_path);
