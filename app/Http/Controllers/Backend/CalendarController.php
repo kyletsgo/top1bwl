@@ -44,6 +44,8 @@ class CalendarController extends Controller
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
 
+        \Log::debug('gggggggg');
+
         $image_large = '';
         if ($request->hasFile('largeImage')) {
             \Log::debug('okokok');
