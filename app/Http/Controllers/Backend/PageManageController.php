@@ -54,7 +54,8 @@ class PageManageController extends Controller
         $rows = $this->pageManagementServ->searchList($current_user, $request, 15);
 
         foreach ($rows as &$row) {
-            $row->url = "https://realleaftaiwan.our-work.com.tw/page/$row->folder_name/$row->page_id";
+//            $row->url = "https://realleaftaiwan.our-work.com.tw/page/$row->folder_name/$row->page_id";
+            $row->url = "https://www.top1bwl.com/page/$row->folder_name/$row->page_id";
         }
 
         return view('admin.page_manage.list', [
