@@ -34,8 +34,8 @@ $config['authentication'] = function () {
 /*============================ License Key ============================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_licenseKey
 
-$config['licenseName'] = 'BWL Dev1';
-$config['licenseKey']  = 'MEEG-CV9R-7QL8-885M-8EXL-SX2L-QGNL';
+$config['licenseName'] = '';
+$config['licenseKey']  = '';
 
 /*============================ CKFinder Internal Directory ============================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_privateDir
