@@ -41,6 +41,9 @@ class CalendarController extends Controller
      */
     public function edit(Request $request)
     {
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+        
         $image_large = '';
         if ($request->hasFile('largeImage')) {
             $orig_image_name = 'calendar-largeImage-' . time() . '.jpg';
