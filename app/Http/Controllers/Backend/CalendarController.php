@@ -55,7 +55,7 @@ class CalendarController extends Controller
         }
 
         $image_small = '';
-        if ($request->hasFile('smallImage')) {
+        if (request()->has('smallImage')) {
             $orig_image_name = 'calendar-smallImage-' . time() . '.jpg';
             $image_path = $request->smallImage->storeAs('calendar', $orig_image_name, 'public');
             $image_small = Storage::url($image_path);
