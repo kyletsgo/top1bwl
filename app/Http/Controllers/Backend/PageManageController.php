@@ -9,6 +9,7 @@ use App\Services\Backend\PageManagementService;
 use App\Repository\Backend\PageManagementRepository;
 use App\Repository\Backend\SiteManagementRepository;
 use App\Repository\Backend\ResourceManagementRepository;
+use App\Repository\Backend\CarouselManagementRepository;
 use App\Services\Backend\ResourceManagementService;
 use App\Repository\Backend\UserRepository;
 use Auth;
@@ -22,6 +23,7 @@ class PageManageController extends Controller
     protected $resourceManagementRepo;
     protected $userRepo;
     protected $resourceManagementSv;
+    protected $carouselManagementRepo;
 
     public function __construct(PageManagementService $siteManagementService,
                                 UserService $userService,
@@ -29,7 +31,8 @@ class PageManageController extends Controller
                                 SiteManagementRepository $siteManagementRepository,
                                 ResourceManagementRepository $resourceManagementRepository,
                                 UserRepository $userRepository,
-                                ResourceManagementService $resourceManagementService)
+                                ResourceManagementService $resourceManagementService,
+                                CarouselManagementRepository $carouselManagementRepository)
     {
         $this->pageManagementServ = $siteManagementService;
         $this->userSv = $userService;
@@ -38,6 +41,7 @@ class PageManageController extends Controller
         $this->resourceManagementRepo = $resourceManagementRepository;
         $this->userRepo = $userRepository;
         $this->resourceManagementSv = $resourceManagementService;
+        $this->carouselManagementRepo = $carouselManagementRepository;
     }
 
     /**
@@ -352,6 +356,42 @@ class PageManageController extends Controller
                 'image' => 'template7.png',
                 'description' => '範本文章',
                 'html' => $row->content
+            ];
+            $ck_template[] = $temp;
+        }
+
+        $carousel_rows = $this->carouselManagementRepo->getByUserId($user_id);
+        foreach ($carousel_rows as $row) {
+            $content = $row->content;
+            $contentObj = json_decode($content);
+
+            $img_htmls = '<div class="carousel">
+                            <div class="carousel__content">
+                                <div class="swiper-container carousel__normal">
+                                    <div class="swiper-wrapper">';
+            foreach ($contentObj as $item) {
+                $img_html = '<div class="swiper-slide">
+                                <img src="'.$item->img_url.'" alt="">
+                                <div class="carousel__text">
+                                    '.$item->title.'
+                                </div>
+                            </div>';
+
+                $img_htmls .= $img_html;
+            }
+
+            $img_htmls .= '</div>
+                            <div class="swiper-button-next swiper-button-next1"></div>
+                            <div class="swiper-button-prev swiper-button-prev2"></div>
+                        </div>
+                    </div>
+                </div>';
+
+            $temp = [
+                'title' => $row->title,
+                'image' => 'template7.png',
+                'description' => '輪播模組',
+                'html' => $img_htmls
             ];
             $ck_template[] = $temp;
         }

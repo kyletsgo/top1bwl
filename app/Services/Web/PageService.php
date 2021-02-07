@@ -111,7 +111,7 @@ class PageService
         $li_items = '';
         $default_image_url = '';
         foreach ($items as $item) {
-            $li_items .= '<a class="swiper-slide sale__open" data-img="' . url($item->image_url) . '" href="javascript:void(0)">' . $item->title . '</a>' . "\n";
+            $li_items .= '<a class="swiper-slide sale__open" data-img="' . $item->image_url . '" href="javascript:void(0)">' . $item->title . '</a>' . "\n";
 
             if ($item->isDefault === 1) {
                 $default_image_url = $item->image_url;

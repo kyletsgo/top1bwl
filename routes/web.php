@@ -9,10 +9,10 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
     Route::auth();
 
     Route::group(['middleware' => 'auth:web', 'namespace' => 'Backend'], function () {
-        Route::post('/logout', function() {
-            Auth::logout();
-            return redirect('/backend');
-        });
+//        Route::post('/logout', function() {
+//            Auth::logout();
+//            return redirect('/backend');
+//        });
 
         Route::get('/', ['as' => 'backend.index', 'uses' => 'IndexController@index']);
 
@@ -91,6 +91,14 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
         Route::post('/promo_management/create', 'PromoManagementController@create');
         Route::get('/promo_management/edit/{id}', 'PromoManagementController@editPage');
         Route::post('/promo_management/edit', 'PromoManagementController@edit');
+
+        // 輪播模組
+        Route::get('/carousel_management', 'CarouselManagementController@index');
+        Route::post('/carousel_management', 'CarouselManagementController@index');
+        Route::get('/carousel_management/create', 'CarouselManagementController@createPage');
+        Route::post('/carousel_management/create', 'CarouselManagementController@create');
+        Route::get('/carousel_management/edit/{id}', 'CarouselManagementController@editPage');
+        Route::post('/carousel_management/edit', 'CarouselManagementController@edit');
 
         // 行事曆區
         Route::get('/calendar', 'CalendarController@show');
