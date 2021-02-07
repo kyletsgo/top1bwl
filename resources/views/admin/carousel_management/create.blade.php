@@ -138,6 +138,7 @@
 		function selectFileWithCKFinder($element) {
 			CKFinder.popup( {
 				chooseFiles: true,
+				readOnly: true,
 				width: 800,
 				height: 600,
 				onInit: function( finder ) {
