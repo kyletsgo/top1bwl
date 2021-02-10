@@ -63,6 +63,38 @@ class PageController extends Controller
         ]);
     }
 
+    /**
+     * 顯示頁面
+     *
+     */
+    public function showHomePage()
+    {
+        // 取得 site content
+        $page = $this->pageServ->getPage(1);
+        $page_content = $page->content;
+        $site_id = $page->site_id;
+        list($line_friend_link, $fb_friend_link) = $this->lineManagementRepo->getLineLinkBySiteId($site_id);
+        $site = $this->siteManagementRepo->getBySiteId($site_id);
+
+        $menu_items = $this->pageServ->getMenuItemsHtml('admin');
+        $calendar_item = $this->pageServ->getCalendarItemHtml();
+        $form_item = $this->pageServ->getFormItemHtml();
+        $floatBtn_item = $this->pageServ->getFloatBtnItemHtml($line_friend_link, $fb_friend_link);
+        $promo_items = $this->pageServ->getPromoItemHtml();
+
+        $page_content = str_replace("<menu_items></menu_items>", $menu_items, $page_content);
+        $page_content = str_replace("<calendar_item></calendar_item>", $calendar_item, $page_content);
+        $page_content = str_replace("<form_item></form_item>", $form_item, $page_content);
+        $page_content = str_replace("<floatbtn_item></floatbtn_item>", $floatBtn_item, $page_content);
+        $page_content = str_replace("<promo_items></promo_items>", $promo_items, $page_content);
+
+        return view('web.page', [
+            'page_content' => $page_content,
+            'site_id' => $page->site_id,
+            'site' => $site
+        ]);
+    }
+
     public function saveForm(Request $request)
     {
         $email = $request->input('email');

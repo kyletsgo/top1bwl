@@ -1,5 +1,7 @@
 <?php
 
+Route::get('/', 'Web\PageController@showHomePage');
+
 Route::group(['namespace' => 'Web', 'prefix' => 'page'], function () {
     Route::get('/{folder_name}/{page_id}', 'PageController@showPage');
     Route::post('/save_form', 'PageController@saveForm');

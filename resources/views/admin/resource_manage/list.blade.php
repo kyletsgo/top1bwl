@@ -12,13 +12,11 @@
 						<div class="form-inline">
                             <form method="post" action="/backend/article_management" name="searchFrom">
 								{{ csrf_field() }}
-								@if ($current_user_role !== 1)
 								<div class="form-group">
 									<a class="btn btn-darkblue btn-xs" href="/backend/resource_manage/create">
 										<i class="fas fa-plus"></i><strong>新增</strong>
 									</a>
 								</div>
-								@endif
                             </form>
                         </div>
 					</div>
@@ -44,7 +42,7 @@
 								<td>{{ $row->created_at }}</td>
 
 								<td style="text-align: right">
-								@if ($current_user_role === 2 || ($current_user_role === 3 && $current_user_id === $row->user_id))
+								@if ($current_user_role === 2 || $current_user_id === $row->user_id)
 										<a class="btn btn-warning btn-xs" href="/backend/resource_manage/edit/{{ $row->article_id }}">
 											<strong>編輯</strong>
 										</a>

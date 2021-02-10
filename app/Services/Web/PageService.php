@@ -118,11 +118,13 @@ class PageService
             }
         }
 
+        $show_sale_popup = empty($default_image_url) ? '' : ' sale__popup--active ';
+
         $menu_items = '<div class="sale">
                 <div class="swiper-container sale__bar">
                     <div class="swiper-wrapper">'. $li_items .'</div>
                 </div>
-                <div class="sale__popup sale__popup--active" id="sale__popup">
+                <div class="sale__popup '. $show_sale_popup .'" id="sale__popup">
                     <div class="sale__box" id="sale__box" style="background-image: url('.$default_image_url.')">
                         <a class="sale__close" id="sale__close" href="javascript:void(0)">
                             <span>&nbsp</span>
