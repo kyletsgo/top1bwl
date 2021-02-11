@@ -19,7 +19,7 @@ class CarouselManagementService
 
     public function searchList(Request $request, $pageLimit = 0)
     {
-        return $this->promoManagementRepo->search($pageLimit);
+        return $this->promoManagementRepo->search($request->current_user, $pageLimit);
     }
 
     private function setCookie($input, $cookie)
@@ -45,23 +45,12 @@ class CarouselManagementService
 
     public function updateItem(Request $request)
     {
-        $validateRules = [
-            'title' => 'required|max:80',
-        ];
-
-        $validateMessage = [
-            'title.required' => MessagePresenter::getRequired('標題'),
-            'title.max' => MessagePresenter::getMax('標題', 80),
-        ];
-
-        $request->validate($validateRules, $validateMessage);
-
-        return $this->promoManagementRepo->update($request->promo_id, $request->title, $request->image_url, $request->isDefault);
+        return $this->promoManagementRepo->update($request->carousel_id, $request->carouselTitle, $request->images);
     }
 
-    public function enableSite($site_id, $enable)
+    public function deleteItem($id)
     {
-        $this->promoManagementRepo->updateEnable($site_id, $enable);
+        $this->promoManagementRepo->delete($id);
     }
 
 }

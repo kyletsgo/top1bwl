@@ -23,8 +23,9 @@
 										</div>
 									</td>
 								</tr>
+								@for ($i = 0; $i < 10; $i++)
 								<tr class="ckfinder-item">
-									<td class="header-require col-lg-2">圖片 1</td>
+									<td class="header-require col-lg-2">圖片 {{ $i+1 }}</td>
 									<td>
 										<div class="col-lg-4 nopadding">
 											<label>圖片標題</label>
@@ -32,24 +33,12 @@
 											<input class="ckfinder-input" type="text" style="width:80%">
 											<button class="ckfinder-popup">Browse</button>
 										</div>
-										<div class="col-md-8">
-											<img src="/ckfinder/userfiles/images/cars.jpg" alt="NoImagee" width="500">
+										<div class="col-md-8" style="margin-top: 22px;">
+											<img src="" alt="尚未設定" width="500">
 										</div>
 									</td>
 								</tr>
-								<tr class="ckfinder-item">
-									<td class="header-require col-lg-2">圖片 2</td>
-									<td>
-										<div class="col-lg-4 nopadding">
-											<label>圖片標題</label>
-											<input class="ckfinder-title form-control" type="text"><br>
-											<input class="ckfinder-input" type="text" style="width:80%">
-											<button class="ckfinder-popup">Browse</button>
-										</div>
-										<div class="col-md-8">
-										</div>
-									</td>
-								</tr>
+								@endfor
 								<!-- 下控制按鈕 -->
 								<tr>
 									<td>&nbsp;</td>
@@ -86,20 +75,24 @@
 			jqueryValidation();
 
 			$('#addItem').click(function () {
-				// $.blockUI({ css: {
-				// 		border: 'none',
-				// 		padding: '15px',
-				// 		backgroundColor: '#000',
-				// 		'-webkit-border-radius': '10px',
-				// 		'-moz-border-radius': '10px',
-				// 		opacity: .5,
-				// 		color: '#fff'
-				// 	}});
+				$.blockUI({ css: {
+						border: 'none',
+						padding: '15px',
+						backgroundColor: '#000',
+						'-webkit-border-radius': '10px',
+						'-moz-border-radius': '10px',
+						opacity: .5,
+						color: '#fff'
+					}});
 
 				var images = [];
 				$('.ckfinder-item').each(function( index, element ) {
 					var title = $(this).find('.ckfinder-title').val();
 					var img_url = $(this).find('.ckfinder-input').val();
+
+					if (title === '' || img_url === '') {
+						return;
+					}
 
 					images.push({
 						'title': title,
@@ -119,7 +112,7 @@
 						console.log(result);
 
 						if (result.code === 0) {
-							location.reload();
+							location.href = '/backend/carousel_management';
 						}
 					},
 					error: function (e) {
@@ -132,10 +125,11 @@
 		$('.ckfinder-popup').click(function (e) {
 			e.preventDefault();
 			var $ckfinder_input = $(this).prevAll('.ckfinder-input').first();
-			selectFileWithCKFinder($ckfinder_input);
+			var $ckfinder_img = $(this).closest('.ckfinder-item').find('img');
+			selectFileWithCKFinder($ckfinder_input, $ckfinder_img);
 		});
 
-		function selectFileWithCKFinder($element) {
+		function selectFileWithCKFinder($element, $ckfinder_img) {
 			CKFinder.popup( {
 				chooseFiles: true,
 				readOnly: true,
@@ -144,7 +138,9 @@
 				onInit: function( finder ) {
 					finder.on( 'files:choose', function( evt ) {
 						var file = evt.data.files.first();
-						$element.val(file.getUrl());
+						var img_url = file.getUrl();
+						$element.val(img_url);
+						$ckfinder_img.attr('src', img_url);
 					} );
 
 					finder.on( 'file:choose:resizedImage', function( evt ) {
@@ -165,22 +161,6 @@
 						return this.optional(element) || re.test(value);
 					}
 			);
-
-			// $('#title').rules("add", {
-			// 	required: true,
-			// 	maxlength: 80,
-			// 	messages: {
-			// 		required: "此欄位必填",
-			// 		maxlength: "最長 80 個字"
-			// 	}
-			// });
-			//
-			// $('#promoImage').rules("add", {
-			// 	required: true,
-			// 	messages: {
-			// 		required: "此欄位必填",
-			// 	}
-			// });
 		}
 	</script>
 @endsection

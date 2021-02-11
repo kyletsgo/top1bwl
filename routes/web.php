@@ -101,6 +101,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'backend'], function () {
         Route::post('/carousel_management/create', 'CarouselManagementController@create');
         Route::get('/carousel_management/edit/{id}', 'CarouselManagementController@editPage');
         Route::post('/carousel_management/edit', 'CarouselManagementController@edit');
+        Route::post('/carousel_management/delete', 'CarouselManagementController@delete');
 
         // 行事曆區
         Route::get('/calendar', 'CalendarController@show');

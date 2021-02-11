@@ -6,13 +6,14 @@ use App\CarouselManagement;
 
 class CarouselManagementRepository
 {
-    public function search($pageLimit)
+    public function search($current_user, $pageLimit)
     {
         \DB::enableQueryLog();
 
         $query = CarouselManagement::select('*');
+        $query->where('user_id', $current_user->id);
 
-        $query->orderBy('promo_id', 'asc');
+        $query->orderBy('carousel_id', 'asc');
 
         if ($pageLimit === 0) {
             $models = $query->get();
@@ -34,19 +35,14 @@ class CarouselManagementRepository
         $model->save();
     }
 
-    public function update($promo_id, $title, $image_url, $isDefault)
+    public function update($carousel_id, $carouselTitle, $images)
     {
-        $model = CarouselManagement::find($promo_id);
-        $model->title = $title;
-
-        if (!empty($image_url)) {
-            $model->image_url = $image_url;
-        }
-
-        $model->isDefault = $isDefault;
+        $model = CarouselManagement::find($carousel_id);
+        $model->title = $carouselTitle;
+        $model->content = $images;
         $model->save();
 
-        return $model->promo_id;
+        return $model->carousel_id;
     }
 
     public function getById($id)
@@ -57,5 +53,11 @@ class CarouselManagementRepository
     public function getByUserId($user_id)
     {
         return CarouselManagement::where('user_id', $user_id)->get();
+    }
+
+    public function delete($id)
+    {
+        $model = CarouselManagement::find($id);
+        $model->delete();
     }
 }
