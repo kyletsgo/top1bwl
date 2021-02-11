@@ -58,8 +58,7 @@ class PageManageController extends Controller
         $rows = $this->pageManagementServ->searchList($current_user, $request, 15);
 
         foreach ($rows as &$row) {
-//            $row->url = "https://realleaftaiwan.our-work.com.tw/page/$row->folder_name/$row->page_id";
-            $row->url = "https://www.top1bwl.com/page/$row->folder_name/$row->page_id";
+            $row->url = url("/page/$row->folder_name/$row->page_id");
         }
 
         return view('admin.page_manage.list', [
@@ -136,208 +135,288 @@ class PageManageController extends Controller
     public function getTemplate()
     {
         $component1 = '
-            <!-- 特殊視覺 -->
-            <div class="main">
-                <div class="note note__center main__note">
-                    <div class="note__content">
-                        <div class="content">
-                            <h2 class="content__title">全美世界12周年慶 優惠送不完</h2>
-                            <p class="content__text">全美世界12周年慶優惠來了!全美世界皙之密平常買不下手，但週年慶來了，想撿便宜趁現在喔，數量有限趁現在!! </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="images main__images">
-                    <div class="images__content images__half">
-                        <img src="/assets/template/images/banner6.jpg" alt="">
-                    </div>
-                </div>
+        <!-- 圖片 -->
+        <div class="images">
+            <div class="images__content">
+                <img src="https://pt.top1bwl.com/wp-content/uploads/2020/10/cropped-img_9904.jpg" alt="">
             </div>
-            ';
+        </div>
+        ';
 
         $component2 = '
-            <!-- 文章(置中) -->
-            <div class="note note__center">
-                <div class="note__content">
-                    <div class="content">
-                        <h2 class="content__title">想舒緩全身痠痛，熱敷還是冰敷才有效？</h2>
-                        <p class="content__text">運動可以健身，但是很常在運動後出現肌肉痠痛的現象，這時是應該要冰敷還是熱敷來緩解痠痛呢？運動醫學科醫師指出，應該要先冰敷，冰敷三天之後，再熱敷，而且冰敷與熱敷時間不宜太長，一次以十分鐘為限。</p>
-                        <ul class="content__list">
-                            <li>每週運動三至五天　每次半小時</li>
-                            <li>應該要先冰敷　不要超過十分鐘</li>
-                            <li>過了急性發炎期　應該要熱敷</li>
-                        </ul>
-                    </div>
-                    <div class="event">
-                        <a class="event__btn" href="javascript:void(0)">前往瞭解</a>
-                    </div>
+        <!-- 文章(置中) -->
+        <div class="note note__center">
+            <div class="note__content">
+                <div class="content">
+                    <h2 class="content__title">效果好，高回購率、容易分享</h2>
+                    <p class="content__text">公司研發產品，團隊透過線上、線上，配合完整教育系統，團隊超強優勢，輕鬆建立小團隊。</p>
                 </div>
             </div>
+        </div>
         ';
 
         $component3 = '
-<!-- 圖文組合 -->
-        <div class="combine combine__reverse combine__half">
+        <!-- 圖文組合 -->
+        <div class="combine combine__half">
             <div class="combine__content">
                 <div class="content__img">
-                    <img src="https://www.enbw.com.tw/FileUpload/Portals/pic1.jpg" alt="">
+                    <img src="https://pt.top1bwl.com/wp-content/uploads/2020/11/img_5812-1-1024x1024.jpg" alt="">
                 </div>
                 <div class="content__article">
                     <div class="article">
-                        <h2 class="article__title">German Energiewende德國能源轉型之旅</h2>
-                        <p class="article__text">德國是全球最早開始進行能源轉型改革的國家之一。能源轉型(Energiewende)對德國來說，不僅僅只是減少傳統燃煤與核能發電，或提高再生能源發電比例而已，而是一場「能源革命」。這是從發電、送電、配電到用電全面進行變革的轉型大計，並擴展到德國全體國民的共同參與。</p>
-                        <ul class="article__list">
-                            <li>清單(一)</li>
-                            <li>清單列表(二)</li>
-                            <li>清單(三)</li>
-                            <li>清單列表(四)</li>
-                        </ul>
-                    </div>
-                    <div class="event">
-                        <a class="event__btn" href="javascript:void(0)">前往瞭解</a>
+                        <h2 class="article__title">皙之密效果看的到<br/>商機就看得到</h2>
+                        <p class="article__text">剛開始用皙之密基礎套組，會擁有代理權，就算不經營也會保留一年，有消費自動續約一年，沒年費、沒月費。</p>
                     </div>
                 </div>
             </div>
         </div>
-';
+        ';
 
         $component4 = '
-<!-- 輪播 -->
-    <div class="carousel">
-        <div class="carousel__content">
-            <div class="swiper-container carousel__normal">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="/assets/template/images/banner1 (1).jpg" alt="">
-                        <div class="carousel__text">
-                            圖片(ㄧ)
-                        </div>
+        <!-- 文章列表 -->
+        <div class="category">
+            <div class="category__content">
+                <!-- 文章 -->
+                <div class="array">
+                    <div class="array__img">
+                        <img src="https://pt.top1bwl.com/wp-content/uploads/2020/11/3-1-1.jpg" alt="">
                     </div>
-                    <div class="swiper-slide">
-                        <img src="/assets/template/images/banner2 (1).jpg" alt="">
-                        <div class="carousel__text">
-                            圖片(二)
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/assets/template/images/banner1 (1).jpg" alt="">
-                        <div class="carousel__text">
-                            圖片(三)
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/assets/template/images/banner5 (1).jpg" alt="">
-                        <div class="carousel__text">
-                            圖片(四)
-                        </div>
+                    <div class="array__content">
+                        <p class="array__title">
+                            皙之密影片教學
+                        </p>
+                        <p class="array__date">
+                            2020-1-18
+                        </p>
+                        <p class="array__text">
+                        </p>
+                        <a class="array__link" href="https://pt.top1bwl.com/blog-p/2084/">READ MORE</a>
                     </div>
                 </div>
-                <div class="swiper-button-next swiper-button-next1"></div>
-                <div class="swiper-button-prev swiper-button-prev2"></div>
+                <!-- 文章 -->
+                <div class="array">
+                    <div class="array__img">
+                        <img src="https://pt.top1bwl.com/wp-content/uploads/2020/11/S__90038278-1-1.jpg" alt="">
+                    </div>
+                    <div class="array__content">
+                        <p class="array__title">
+                            全美世界皙之密保養品不妝真我透亮肌
+                        </p>
+                        <p class="array__date">
+                            2020-1-18
+                        </p>
+                        <p class="array__text">
+                            全美世界皙之密1-9號全部膚質都適用，主打不妝真我，也就是透過好成分，皙之密有效成分滲透到底層建立健康的肌膚，由內而外的自信，透亮象燈泡肌一樣。
+                        </p>
+                        <a class="array__link" href="https://pt.top1bwl.com/blog-p/2085/">READ MORE</a>
+                    </div>
+                </div>
+                <!-- 文章 -->
+                <div class="array">
+                    <div class="array__img">
+                        <img src="https://pt.top1bwl.com/wp-content/uploads/2020/11/img_5812-1-1024x1024.jpg" alt="">
+                    </div>
+                    <div class="array__content">
+                        <p class="array__title">
+                            皙之密不當一斑的女人保養新趨勢妳知道嗎?
+                        </p>
+                        <p class="array__date">
+                            2020-1-18
+                        </p>
+                        <p class="array__text">
+                            全美世界皙之密效果真的這麼好?到底是什麼原理?用了晳之密真的可以素顏?<br> 皙之密為什麼能達到素顏健康美肌, 是因為在深夜都在為你的肌膚在加強健康與更新<br> 當我們進入睡眠時，肌膚也在進行著深層代謝與給養份的工作：生成新的肌膚細胞，代謝老化細胞。因此夜間…….生成新的肌膚細胞，代謝老化細胞。
+                            <br> 這是肌膚最需要營養補給的時間
+                            <br> 也是抗老化.抗氧化成份發揮作用的時候
+                            <br> 每天晚上睡眠時間，透過這些有效的營養成份，給你細胞餵飽飽，不斷的給細胞養份 → 代謝→ 更新 → 淨化<br> 相信你，很快就能達到自然健康的透亮肌膚哦～
+                        </p>
+                        <a class="array__link" href="https://pt.top1bwl.com/blog-p/2088/">READ MORE</a>
+                    </div>
+                </div>
+                <!-- 文章 -->
+                <div class="array">
+                    <div class="array__img">
+                        <img src="https://pt.top1bwl.com/wp-content/uploads/2020/11/S__90038278-1-1.jpg" alt="">
+                    </div>
+                    <div class="array__content">
+                        <p class="array__title">
+                            皙之密產品見證
+                        </p>
+                        <p class="array__date">
+                            2020-1-18
+                        </p>
+                        <p class="array__text">
+                            
+                        </p>
+                        <a class="array__link" href="https://pt.top1bwl.com/blog-p/2087/">READ MORE</a>
+                    </div>
+                </div>
+                <!-- 文章 -->
+                <div class="array">
+                    <div class="array__img">
+                        <img src="https://pt.top1bwl.com/wp-content/uploads/2020/11/扜芞厙_500437231_wx_痄雄誑薊厙踢⺈扦蝠ㄗ準き珛妀蚚ㄘ.jpg" alt="">
+                    </div>
+                    <div class="array__content">
+                        <p class="array__title">
+                            皙之密斜槓教學
+                        </p>
+                        <p class="array__date">
+                            2020-1-18
+                        </p>
+                        <p class="array__text">
+                            全美世界皙之密小教室
+                        </p>
+                        <a class="array__link" href="https://pt.top1bwl.com/blog-p/2089/">READ MORE</a>
+                    </div>
+                </div>
+                <!-- 文章 -->
+                <div class="array">
+                    <div class="array__img">
+                    <img src="https://pt.top1bwl.com/wp-content/uploads/2020/11/線上購-1.jpg" alt="">
+                    </div>
+                    <div class="array__content">
+                        <p class="array__title">
+                            全美世界皙之密非會員線上購
+                        </p>
+                        <p class="array__date">
+                            2020-1-18
+                        </p>
+                        <p class="array__text">
+                            全美世界皙之密非會員線上購物專區。
+                        </p>
+                        <a class="array__link" href="https://pt.top1bwl.com/blog-p/2092/">READ MORE</a>
+                    </div>
+                </div>
+                <!-- 文章 -->
+                <div class="array">
+                    <div class="array__img">
+                        <img src="https://pt.top1bwl.com/wp-content/uploads/2020/11/img2-1-300x223.png?is-pending-load=1" alt="">
+                    </div>
+                    <div class="array__content">
+                        <p class="array__title">
+                            皙之密代理獎金制度
+                        </p>
+                        <p class="array__date">
+                            2020-1-18
+                        </p>
+                        <p class="array__text">
+                        </p>
+                        <a class="array__link" href="https://pt.top1bwl.com/blog-p/2091/">READ MORE</a>
+                    </div>
+                </div>
+                <!-- 文章 -->
+                <div class="array">
+                    <div class="array__img">
+                        <img src="https://pt.top1bwl.com/wp-content/uploads/2020/10/投影片32-300x169.jpg?is-pending-load=1" alt="">
+                    </div>
+                    <div class="array__content">
+                        <p class="array__title">
+                            全美世界皙之密事業分析
+                        </p>
+                        <p class="array__date">
+                            2020-1-18
+                        </p>
+                        <p class="array__text">
+                                全美世界皙之密事業分析，全美世界皙之密是美的行業，跟傳統創業不太一樣，不用花大錢，小資族就可以創業。
+                        </p>
+                        <a class="array__link" href="https://pt.top1bwl.com/blog-p/2091/">READ MORE</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-';
+        ';
 
         $component5 = '
-<!-- 圖片 -->
-    <div class="images images__half">
-        <div class="images__content">
-            <img src="/assets/template/images/banner1 (1).jpg" alt="">
-        </div>
-    </div>
-    <div class="images images__half">
-        <div class="images__content">
-            <div class="iframe">
-                <iframe src="https://www.youtube.com/embed/9ckZ_8ROvd8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
+        <!-- 影片 -->
+        <div class="images images__half">
+            <div class="images__content">
+                <div class="iframe">
+                    <iframe src="https://www.youtube.com/embed/9ckZ_8ROvd8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
             </div>
         </div>
-    </div>
-';
+        ';
 
         $component6 = '
-<!-- 項目 -->
-    <div class="item">
-        <div class="item__article">
-            <div class="content">
-                <h2 class="content__title">Netflix 收費方案解析 高畫質要多少錢</h2>
-                <p class="content__text">2016 年登台的 Netflix 主要以歐美影集為大宗，最一開始的免費試用一個月優惠吸引許多人躍躍欲試，前陣子台灣免費試用期取消，最近重新回鍋！不用註冊帳號就可以免費收看10部作品，包含熱門電影和影集。加入註冊後就要開始收費。雖然不像
-                    Spotify、Apple Music 一樣有多人共用的「家庭方案」，但可以選擇最高級的訂閱方案，找 4 名親朋好友一起分享，一個人單月不用 100 元就能看到飽，實在非常吸引人。</p>
-            </div>
-        </div>
-        <div class="item__content">
-            <div class="content">
-                <div class="article">
-                    <h2 class="article__title">基本會員</h2>
-                    <p class="article__text">基本方案每個月月費為 NT$ 270 可以收看標準畫質 SD 影片，只能在 1 個裝置螢幕觀看。</p>
-                    <ul class="article__list">
-                        <li>適合個人使用</li>
-                        <li>輕度追劇上癮</li>
-                        <li>$270</li>
-                    </ul>
+        <!-- 項目 -->
+        <div class="item">
+            <div class="item__article">
+                <div class="content">
+                    <h2 class="content__title">服務項目</h2>
+                    <p class="content__text"></p>
                 </div>
             </div>
-            <div class="content">
-                <div class="article">
-                    <h2 class="article__title">標準會員</h2>
-                    <p class="article__text">標準方案每個月月費為 NT$ 330 可以收看高畫質 HD 影片，能在 2 個裝置螢幕上觀看。</p>
-                    <ul class="article__list">
-                        <li>適合經常上網追劇</li>
-                        <li>中度追劇上癮</li>
-                        <li>$330</li>
-                    </ul>
+            <div class="item__content">
+                <div class="content">
+                    <div class="article">
+                        <img class="article__img" src="images/icon-04.png" alt="">
+                        <h2 class="article__title">外場皙之密品牌分享會</h2>
+                        <p class="article__text">簡單輕鬆聊天，大家互相交流，輕鬆得氛圍，讓不習慣去公司的朋友，也喜歡。</p>
+                        <!-- <ul class="article__list">
+                            <li>適合個人使用</li>
+                            <li>輕度追劇上癮</li>
+                            <li>$270</li>
+                        </ul> -->
+                    </div>
                 </div>
-            </div>
-            <div class="content">
-                <div class="article">
-                    <h2 class="article__title">高級會員</h2>
-                    <p class="article__text">高級方案月費為 NT$ 390 三種，可以收看超高畫質 UltraHD 影片，最多同時能在 4 個裝置螢幕上觀看影片。</p>
-                    <ul class="article__list">
-                        <li>追劇是人生沒意義</li>
-                        <li>重度追劇上癮</li>
-                        <li>$390</li>
-                    </ul>
+                <div class="content">
+                    <div class="article">
+                        <img class="article__img" src="images/icon-03.png" alt="">
+                        <h2 class="article__title">創業培訓</h2>
+                        <p class="article__text">每個月都有進修課，想進修專業課程都可以報名創訓、皙之密產品課，不會強迫上課。</p>
+                        <!-- <ul class="article__list">
+                            <li>適合經常上網追劇</li>
+                            <li>中度追劇上癮</li>
+                            <li>$330</li>
+                        </ul> -->
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="article">
+                        <img class="article__img" src="images/icon-02.png" alt="">
+                        <h2 class="article__title">網路陌生人脈的建立</h2>
+                        <p class="article__text">輕鬆分享自己的故事，建立個人品牌，透過網路建立陌生人脈，輕鬆打造小團隊、大生意，開分店快速建立被動收入，每月都有網路課程傳授。</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-';
+        ';
 
         $ck_template = [
             [
-                'title' => '特殊視覺',
+                'title' => '圖片',
                 'image' => 'template1.png',
-                'description' => '特殊視覺樣板',
+                'description' => '預設模組',
                 'html' => $component1
             ],
             [
                 'title' => '文章(置中)',
                 'image' => 'template2.png',
-                'description' => '文章(置中)樣板',
+                'description' => '預設模組',
                 'html' => $component2
             ],
             [
                 'title'=> '圖文組合',
                 'image'=> 'template3.png',
-                'description'=> '圖文組合樣板',
+                'description'=> '預設模組',
                 'html'=> $component3
             ],
             [
-                'title'=> '輪播',
+                'title'=> '文章列表',
                 'image'=> 'template4.png',
-                'description'=> '輪播樣板',
+                'description'=> '預設模組',
                 'html'=> $component4
             ],
             [
-                'title'=> '圖片',
+                'title'=> '影片',
                 'image'=> 'template5.png',
-                'description'=> '圖片樣板',
+                'description'=> '預設模組',
                 'html'=> $component5
             ],
             [
                 'title'=> '項目',
                 'image'=> 'template6.png',
-                'description'=> '項目樣板',
+                'description'=> '預設模組',
                 'html'=> $component6
             ],
         ];
@@ -354,7 +433,7 @@ class PageManageController extends Controller
             $temp = [
                 'title' => $row->title,
                 'image' => 'template7.png',
-                'description' => '範本文章',
+                'description' => '文章範本',
                 'html' => $row->content
             ];
             $ck_template[] = $temp;
