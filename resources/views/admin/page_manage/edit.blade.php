@@ -27,7 +27,7 @@
                                 <tr>
                                     <td class="header-require col-lg-1"><span style="color:red">*</span>內容</td>
                                     <td>
-                                        <div class="col-lg-11 nopadding">
+                                        <div class="nopadding">
                                             <textarea id="content" name="content" class="form-control" rows="100" cols="80">
                                                 {{ $row->content }}
                                             </textarea>
