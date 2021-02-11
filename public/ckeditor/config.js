@@ -10,6 +10,8 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
 	config.toolbarGroups = [
+		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
 		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
 		{ name: 'links' },
@@ -19,8 +21,6 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
 		{ name: 'others' },
 		'/',
-		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
 		{ name: 'styles' },
 		{ name: 'colors' },
 		{ name: 'about' }
@@ -28,7 +28,8 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
-	config.removeButtons = 'Underline,Subscript,Superscript';
+	// 參考 https://ckeditor.com/old/forums/CKEditor/Complete-list-of-toolbar-items#comment-123266
+	config.removeButtons = 'Underline,Subscript,Superscript,Strike,RemoveFormat,Blockquote,Styles,Format,About,PasteFromWord,Anchor,Scayt,SpecialChar,HorizontalRule,Indent,Outdent,Unlink';
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
