@@ -91,11 +91,11 @@ class PageService
     public function getFloatBtnItemHtml($line_friend_link, $fb_friend_link)
     {
         return '<div class="floatBtn">
-                    <a class="fb" href="' . $line_friend_link . '">
+                    <a class="fb" href="' . $fb_friend_link . '">
                         <img src="/assets/template/images/facebook.png" alt="">
                         <p>線上諮詢</p>
                     </a>
-                    <a class="line" href="' . $fb_friend_link . '">
+                    <a class="line" href="' . $line_friend_link . '">
                         <img src="/assets/template/images/LINE_APP_RGB_20190219-02.png" alt="">
                         <p>線上諮詢</p>
                     </a>
