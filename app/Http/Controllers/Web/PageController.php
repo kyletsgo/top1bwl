@@ -34,9 +34,6 @@ class PageController extends Controller
      */
     public function showPage($folder_name, $page_id)
     {
-        // 取得 site head info
-
-
         // 取得 site content
         $page = $this->pageServ->getPage($page_id);
         $page_content = $page->content;
@@ -45,6 +42,43 @@ class PageController extends Controller
         $site = $this->siteManagementRepo->getBySiteId($site_id);
 
         $menu_items = $this->pageServ->getMenuItemsHtml($folder_name);
+        $calendar_item = $this->pageServ->getCalendarItemHtml();
+        $form_item = $this->pageServ->getFormItemHtml();
+        $floatBtn_item = $this->pageServ->getFloatBtnItemHtml($line_friend_link, $fb_friend_link);
+        $promo_items = $this->pageServ->getPromoItemHtml();
+
+        $page_content = str_replace("<menu_items></menu_items>", $menu_items, $page_content);
+        $page_content = str_replace("<calendar_item></calendar_item>", $calendar_item, $page_content);
+        $page_content = str_replace("<form_item></form_item>", $form_item, $page_content);
+        $page_content = str_replace("<floatbtn_item></floatbtn_item>", $floatBtn_item, $page_content);
+        $page_content = str_replace("<promo_items></promo_items>", $promo_items, $page_content);
+
+        return view('web.page', [
+            'page_content' => $page_content,
+            'site_id' => $page->site_id,
+            'site' => $site
+        ]);
+    }
+
+    /**
+     * 顯示頁面 Subdomain
+     *
+     */
+    public function showPageForSubdomain($page_id)
+    {
+        $host = request()->getHttpHost();
+        $paths = explode('.', $host);
+        $folder_name = $paths[0];
+        \Log::debug($folder_name);
+
+        // 取得 site content
+        $page = $this->pageServ->getPage($page_id);
+        $page_content = $page->content;
+        $site_id = $page->site_id;
+        list($line_friend_link, $fb_friend_link) = $this->lineManagementRepo->getLineLinkBySiteId($site_id);
+        $site = $this->siteManagementRepo->getBySiteId($site_id);
+
+        $menu_items = $this->pageServ->getMenuItemsHtml($folder_name, true);
         $calendar_item = $this->pageServ->getCalendarItemHtml();
         $form_item = $this->pageServ->getFormItemHtml();
         $floatBtn_item = $this->pageServ->getFloatBtnItemHtml($line_friend_link, $fb_friend_link);

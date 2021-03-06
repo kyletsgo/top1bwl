@@ -26,13 +26,18 @@ class PageService
         return $this->pageManagementRepo->getById($page_id);
     }
 
-    public function getMenuItemsHtml($folder_name)
+    public function getMenuItemsHtml($folder_name, $isSubdomain = false)
     {
         $pages = $this->pageManagementRepo->getAllPagesByFolderName($folder_name);
 
         $li_items = '';
         foreach ($pages as $page) {
-            $li_items .= '<li>' . '<a href="'. url("/page/$folder_name/$page->page_id") .'">' . $page->title . '</a> ' . '</li>';
+            if ($isSubdomain) {
+                $li_items .= '<li>' . '<a href="'. url("/page/$page->page_id") .'">' . $page->title . '</a> ' . '</li>';
+            } else {
+                $li_items .= '<li>' . '<a href="'. url("/page/$folder_name/$page->page_id") .'">' . $page->title . '</a> ' . '</li>';
+            }
+
         }
 
         $menu_items = '<div class="header__menu" id="menuList"><ul>' . $li_items . '</ul></div>';

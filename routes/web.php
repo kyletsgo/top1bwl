@@ -4,6 +4,7 @@ Route::get('/', 'Web\PageController@showHomePage');
 
 Route::group(['namespace' => 'Web', 'prefix' => 'page'], function () {
     Route::get('/{folder_name}/{page_id}', 'PageController@showPage');
+    Route::get('/{page_id}', 'PageController@showPageForSubdomain')->where('page_id', '[0-9]+');;
     Route::post('/save_form', 'PageController@saveForm');
 });
 
