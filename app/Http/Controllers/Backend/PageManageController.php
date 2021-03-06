@@ -59,6 +59,9 @@ class PageManageController extends Controller
 
         foreach ($rows as &$row) {
             $row->url = url("/page/$row->folder_name/$row->page_id");
+
+            $subdomain_url = url("/page/$row->page_id");
+            $row->subdomain_url = str_replace("www",$row->folder_name,$subdomain_url);
         }
 
         return view('admin.page_manage.list', [

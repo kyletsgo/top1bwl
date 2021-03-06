@@ -44,7 +44,10 @@
 							<tr>
 								<td>{{ $rows->firstItem() + $key }}</td>
 								<td>{{ $row->title }}</td>
-								<td>{{ $row->url }}</td>
+								<td>
+									<a href="{{ $row->url }}">{{ $row->url }}</a><br>
+									<a href="{{ $row->subdomain_url }}">{{ $row->subdomain_url }}</a>
+								</td>
 								<td>{{ $row->nickname }}</td>
 								<td>{{ $row->created_at }}</td>
 
